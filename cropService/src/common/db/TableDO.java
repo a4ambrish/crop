@@ -4,15 +4,7 @@ package common.db;
 // PURPOSE          : Java object representing a Database Table (Structure+Data).
 // NOTES            : None
 // LAST MODIFIED    :
-//  20040115 AMT007 Added method
-//  20030828 AKS017 Added comment for column's normal maximum display 
-//                  width in characters for 'getMetaData()'
-//  20030602 AKS003 QA modifications
-//  20030519 RCN007 extends ClientObject
-//  20030501 CPO001 Added getColumnCount()
-//  20030423 AKS002 Documentaion of getMetadata()
-//  20030410 AKS001 Documentaion
-//  20030310 RCN001 Created
+//  20160112 AMR Created
 //////////////////////////////////////////////////////////////////////////////
 // Copyright 2003 National Informatics Centre, NIC. http://www.nic.in
 // All Rights Reserved.
