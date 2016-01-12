@@ -53,6 +53,36 @@
 		<phase-listener id="nocache">nic.confonet.web.efiling.common.CacheControlPhaseListener</phase-listener>
 	</lifecycle>-->
         
-        
+        <navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{loginBean.loginAttempt}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/client/userhome.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+		<navigation-case>
+			<from-action>#{loginBean.createNewAccount}</from-action>
+			<from-outcome>newaccount</from-outcome>
+			<to-view-id>/createuser.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+		<navigation-case>
+			<from-action>#{loginBean.loginAttempt}</from-action>
+			<from-outcome>failed</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{loginBean.loginAttempt}</from-action>
+			<from-outcome>notmatch</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+
+
+
+	</navigation-rule>
 
 </faces-config>

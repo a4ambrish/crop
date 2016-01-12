@@ -7,8 +7,20 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:form id="frmClientMenu" >
-	<p:growl id="messages" showDetail="false" />
-    <p:menu model="#{menuController.model}" style="width:auto;" toggleable="true"/>
+<!--	<p:growl id="messages" showDetail="false" />
+    <p:menu>
+        <p:submenu label="Data Entry">
+            <p:menuitem value="New Entry"  update="messages" icon="ui-icon-disk" />
+            <p:menuitem value="Update Entry"  update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+        </p:submenu>
+        <p:submenu label="Exit">
+            <p:menuitem value="Exit"   ajax="false" icon="ui-icon-close"/>
+        </p:submenu>
+        <p:submenu label="Navigations">
+            <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
+            <p:menuitem value="Internal" outcome="/mobile/index" icon="ui-icon-star"/>
+        </p:submenu>
+    </p:menu>-->
 </h:form>
 
 </html>

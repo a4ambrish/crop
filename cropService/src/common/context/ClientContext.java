@@ -15,6 +15,7 @@ package common.context;
 //
 // Importing standard java packages/classes
 //
+
 import java.util.*;
 import java.io.*;
 //
@@ -22,27 +23,30 @@ import java.io.*;
 //
 import common.*;
 
-
 /**
  * Stores client identification data
  *
  * @author RCN
  */
 public class ClientContext extends ClientObject implements Serializable {
+
     //////////////////////////////////////////////////////////////////
     // INSTANCE VARIABLES
     //////////////////////////////////////////////////////////////////
-    /** Session identifier */
-    private long sessionID;
 
-    /** Logged in user name */
+    /**
+     * Session identifier
+     */
+    private String sessionID;
+
+    /**
+     * Logged in user name
+     */
     private String userID;
-
-     /** State Code...DIV21072008*/
-    private String StateCode;
-
-    /** RTO Code...DIV21072008*/
-    private String RtoCode;
+    private String userName;
+    private String mobile;
+    private Boolean activeInd;
+    private String remarks;
 
     //////////////////////////////////////////////////////////////////
     // CONSTRUCTOR(S)
@@ -51,46 +55,101 @@ public class ClientContext extends ClientObject implements Serializable {
      * Constructor
      */
     //public ClientContext(long sessionID, String userID) {
-    public ClientContext(long sessionID, String userID,String StateCode,String RtoCode) {
-        this.sessionID = sessionID;
+    public ClientContext( String userID, String userName, String mobile, boolean activeInd,  String remarks) {
+     
         this.userID = userID;
-        this.StateCode = StateCode;
-        this.RtoCode = RtoCode;
+        this.userName = userName;
+        this.mobile = mobile;
+        this.activeInd = activeInd;
+        this.remarks = remarks;
+
     }
 
     //////////////////////////////////////////////////////////////////
     // GETTERS / SETTERS
     //////////////////////////////////////////////////////////////////
-    public long getSessionID() {
+    public String getSessionID() {
         return sessionID;
     }
 
     public String getUserID() {
         return userID;
     }
-    /** Added By DIV21072008...Start
 
-    public void setStateCode(String StateCode) {
-        this.StateCode = StateCode;
+    /**
+     * @param sessionID the sessionID to set
+     */
+    public void setSessionID(String sessionID) {
+        this.sessionID = sessionID;
     }
 
-    public void setRtoCode(String RtoCode) {
-        this.RtoCode = RtoCode;
-    }*/
-
-    public String getStateCode() {
-        return StateCode;
+    /**
+     * @param userID the userID to set
+     */
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
-    public String getRtoCode() {
-        return RtoCode;
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
     }
 
-    /** Added By DIV21072008...End*/
-
-    //SARJIT---------31/05/2010
-    //USED BY WEB APPLICATION
-     public void setRtoCode(String RtoCode) {
-        this.RtoCode = RtoCode;
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
+
+    /**
+     * @return the mobile
+     */
+    public String getMobile() {
+        return mobile;
+    }
+
+    /**
+     * @param mobile the mobile to set
+     */
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    /**
+     * @return the activeInd
+     */
+    public Boolean getActiveInd() {
+        return activeInd;
+    }
+
+    /**
+     * @param activeInd the activeInd to set
+     */
+    public void setActiveInd(Boolean activeInd) {
+        this.activeInd = activeInd;
+    }
+
+    /**
+     * @return the remarks
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+
+    /**
+     * @param remarks the remarks to set
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientContext{" + "sessionID=" + sessionID + ", userID=" + userID + ", userName=" + userName + ", mobile=" + mobile + ", activeInd=" + activeInd + ", remarks=" + remarks + '}';
+    }
+    
+
 }
