@@ -3,8 +3,9 @@ package server.db.connection;
 import java.sql.Connection;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
+
 import nic.java.util.Debug;
+import org.apache.tomcat.jdbc.pool.DataSource;
 
 public class ConnectionPooling {
 
@@ -18,8 +19,15 @@ public class ConnectionPooling {
             if (dsLocal != null) {
                 con = dsLocal.getConnection();
             } else {
-                String dsString = "java:/comp/env/jdbc/localdbserver";
-                dsLocal = (DataSource) new InitialContext().lookup(dsString);
+                dsLocal = new DataSource();
+                dsLocal.setDriverClassName("org.postgresql.Driver");
+                dsLocal.setUrl("jdbc:postgresql://localhost:5432/crop");
+                dsLocal.setUsername("postgres");
+                dsLocal.setPassword("postgres");
+                dsLocal.setInitialSize(10);
+                dsLocal.setMaxActive(20);
+                dsLocal.setMaxIdle(5);
+                dsLocal.setMinIdle(2);
                 con = dsLocal.getConnection();
             }
 
@@ -29,16 +37,24 @@ public class ConnectionPooling {
         }
         return con;
     }
-    
-     public static Connection getDBConnectionRemoteServer() throws NamingException, Exception {
+
+    public static Connection getDBConnectionRemoteServer() throws NamingException, Exception {
 
         Connection con = null;
         try {
             if (dsRemote != null) {
                 con = dsRemote.getConnection();
             } else {
-                String dsString = "java:/comp/env/jdbc/remotedbserver";
-                dsRemote = (DataSource) new InitialContext().lookup(dsString);
+                dsRemote = new DataSource();
+                dsRemote.setDriverClassName("org.postgresql.Driver");
+                // change as per remote DB Server.
+                dsRemote.setUrl("jdbc:postgresql://localhost:5432/crop");
+                dsRemote.setUsername("postgres");
+                dsRemote.setPassword("postgres");
+                dsRemote.setInitialSize(10);
+                dsRemote.setMaxActive(20);
+                dsRemote.setMaxIdle(5);
+                dsRemote.setMinIdle(2);
                 con = dsRemote.getConnection();
             }
 
