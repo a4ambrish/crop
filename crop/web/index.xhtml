@@ -1,41 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-   <h:form id="login" prependId="false">
-			<p:panel id="panel" header="Login"	style="margin-bottom:10px;">
-				<p:messages id="messages" autoUpdate="true"  closable="true"/>
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="txtEmailId" value="Email Id" />
-					<p:inputText id="txtEmailId" required="true"
-						
-						validatorMessage="Please enter email id" label="User ID " tabindex="1"/>
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="templates/template.xhtml">
 
-					<h:outputLabel for="txtPassword" value="Password" />
-					<p:password id="txtPassword" required="true"
-						 label="Password" tabindex="2"/>
-<!--				<h:inputHidden id="txtRandom" value="#{loginBean.random}"/>-->
-					</h:panelGrid>
-				<h:panelGrid columns="2" cellpadding="10">
-					<p:commandButton  value="Login" icon="ui-icon-unlocked" onclick="javascript:encryptedMd5();" ajax="false" tabindex="3">
-					</p:commandButton>
-					<p:outputLabel></p:outputLabel>
-				<p:commandButton value="Forgot Password" action="reqpassreset" ajax="false" immediate="true" tabindex="4"> </p:commandButton>
-			
-					<p:commandButton value="Create New Account"  immediate="true" tabindex="5"> </p:commandButton>
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<p:galleria value="#{imagesView.images}" var="image" panelWidth="1000"
+			panelHeight="250" effect="slide" effectSpeed="50"
+			transitionInterval="10000">
+                    <p:graphicImage name="images/#{image}"  url="images/#{image}"
+				alt="Welcome to Confonet - E-Filing System  images/#{image}" />
+		</p:galleria>
+		<p:accordionPanel>
+			<p:tab title="ABOUT US">
+				<h:panelGrid columns="1" cellpadding="10">
+					<h:outputText
+						value="Test Content. Need to replace with this project requirement. Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement." />
 				</h:panelGrid>
-			</p:panel>
-		</h:form>
-</html>
+			</p:tab>
+			<p:tab title="HISTORY">
+				<h:panelGrid columns="1" cellpadding="10">
+					<h:outputText
+						value="Test Content. Need to replace with this project requirement. Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.Test Content. Need to replace with this project requirement.... " />
+					<p:link value="Read More" href="">
+					</p:link>
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="RIGHT TO INFORMATION ACT - 2005">
+				<h:panelGrid columns="1" cellpadding="10">
+					<!-- 					<p:graphicImage name="demo/images/godfather/godfather3.jpg" /> -->
+					<h:outputText
+						value="The Right to Information Act (RTI) is an Act of the Parliament of India &quot;
+						to provide for setting out the practical regime of right to
+						information for citizens &quot; and replaces the erstwhile Freedom of
+						information Act, 2002.The Act applies to all States and Union
+						Territories of India except Jammu &amp; Kashmir. Under the provisions
+						of the Act, any citizen may request information from a &quot;public
+						authority&quot; (a body of Government or &quot;instrumentality of
+						State&quot;) which is required to reply expeditiously or within thirty
+						days. The Act also requires every public authority to computerise
+						their records for wide dissemination and to proactively certain
+						categories of information so that the citizens need minimum
+						recourse to request for information formally.It is an initiative
+						taken by the Department of Personnel and Training, Ministry of
+						Personnel, Public Grievances and Pensions..." />
+					<p:link value="Read More" href="">
+					</p:link>
+				</h:panelGrid>
+			</p:tab>
+		</p:accordionPanel>
+	</ui:define>
+</ui:composition>
