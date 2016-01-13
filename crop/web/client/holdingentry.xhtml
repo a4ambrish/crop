@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/template.xhtml">
+
+    <ui:define name="metadata">
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/templates/clientmenu.xhtml" />
+    </ui:define>
+    <ui:define name="header">
+        <ui:include src="/templates/clientheader.xhtml" />
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="userhome" prependId="false">
+            <p:panel header="Holding Data Entry Form">
+                <p:panelGrid columns="6">
+                    <p:outputLabel for="lstState" value="Select State"/>
+                    <p:selectOneMenu id="lstState" value="#{holdingDataBean.stateCd}" 
+                                     required="true" 
+                                     requiredMessage="Please Select State" 
+                                     label="State" >
+
+                        <p:ajax listener="#{holdingDataBean.updateDistrictList()}"
+                                update="lstDistrict">
+                        </p:ajax>
+                        <f:selectItems value="#{holdingDataBean.stateList}"/>
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="lstDistrict" value="District"/>
+                    <p:selectOneMenu id="lstDistrict" value="#{holdingDataBean.districtCd}" 
+
+                                     required="true" requiredMessage="Please Select District" label="District">
+                        <f:selectItems value="#{holdingDataBean.districtList}"/>
+                        <p:ajax listener="#{holdingDataBean.updateTehsilList()}"
+                                update="lstTehsil">
+                        </p:ajax>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="lstTehsil" value="Tehsil"/>
+                    <p:selectOneMenu id="lstTehsil" value="#{holdingDataBean.tehsilCd}" required="true" requiredMessage="Please Select Tehsil" label="Tehsil">
+                        <f:selectItems value="#{holdingDataBean.tehsilList}"/>
+                        <p:ajax listener="#{holdingDataBean.updateVillageList()}"
+                                update="lstVillage">
+                        </p:ajax>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="lstVillage" value="Village"/>
+                    <p:selectOneMenu id="lstVillage" value="#{holdingDataBean.villageCd}" required="true" requiredMessage="Please Select Village" label="Village">
+                        <f:selectItems value="#{holdingDataBean.villageList}"/>
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel for="lstCrop" value="Select Crop"/>
+                    <p:selectOneMenu id="lstCrop" value="#{holdingDataBean.cropCd}" required="true" requiredMessage="Please Select Crop" label="Crop">
+                        <f:selectItems value="#{holdingDataBean.cropList}"/>
+                    </p:selectOneMenu>
+
+
+
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

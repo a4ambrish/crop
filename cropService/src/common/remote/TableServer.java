@@ -28,6 +28,11 @@ import java.util.*;
 import common.*;
 import common.db.*;
 import common.context.*;
+import common.dobj.crop.CropMasterDO;
+import common.dobj.crop.DistrictMasterDO;
+import common.dobj.crop.StateMasterDO;
+import common.dobj.crop.TehsilMasterDO;
+import common.dobj.crop.VillageMasterDO;
 
 
 /**
@@ -99,4 +104,10 @@ public interface TableServer extends Remote {
      * @throws ClientException
      */
     int execIUDSQL(String sql) throws RemoteException, ClientException;
+    
+    ArrayList <StateMasterDO> loadStateMasterList() throws ClientException;
+    ArrayList <DistrictMasterDO> loadDistrictMasterList() throws ClientException;
+    ArrayList <TehsilMasterDO> loadTehsilMasterList() throws ClientException;
+    ArrayList <VillageMasterDO> loadVillageMasterList() throws ClientException;
+    ArrayList <CropMasterDO> loadCropMasterList() throws ClientException;
 }
