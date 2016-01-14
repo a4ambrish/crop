@@ -18,6 +18,7 @@ package common.db;
 //
 // Importing standard java packages/classes
 //
+
 import java.sql.*;
 import java.io.*;
 //
@@ -26,39 +27,46 @@ import java.io.*;
 import nic.java.util.*;
 import common.*;
 
-
 /**
  * Converts a given master table database into Java Object (Read-Only).
  *
- * ASSUMPTION:
- *    The master table is assumed to be having the first two columns of
- *    prime interest. The first column gives 'CODE' and the second gives
- *    a 'DESCR' data. However the master table DO represents the entire
- *    table and stores the data in the String format irrespective of
- *    the actual data type in the table.
+ * ASSUMPTION: The master table is assumed to be having the first two columns of
+ * prime interest. The first column gives 'CODE' and the second gives a 'DESCR'
+ * data. However the master table DO represents the entire table and stores the
+ * data in the String format irrespective of the actual data type in the table.
  *
  * @author RCN
  */
 public class MasterTableDO extends TableDO {
+
     ////////////////////////////////////////////////////////////////////////
     // CONSTANTS
     ////////////////////////////////////////////////////////////////////////
-    /** Index at which the Code data lies in the table */
-    public static final int IDX_CODE  = 0;
-    /** Index at which the Description data lies in the table */    
+    /**
+     * Index at which the Code data lies in the table
+     */
+    public static final int IDX_CODE = 0;
+    /**
+     * Index at which the Description data lies in the table
+     */
     public static final int IDX_DESCR = 1;
-    /** CODE column name */    
+    /**
+     * CODE column name
+     */
     public static final String COL_NAME_CODE = "CODE";
-    /** DESCR column name */    
+    /**
+     * DESCR column name
+     */
     public static final String COL_NAME_DESCR = "DESCR";
-    
+
     ////////////////////////////////////////////////////////////////////////
     // INSTANCE VARIABLES
     ////////////////////////////////////////////////////////////////////////
-    /** Data that to be used by the client in *available ordered* format */
+    /**
+     * Data that to be used by the client in *available ordered* format
+     */
     private String[][] data_AO;
 
-    
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR(S)
     ////////////////////////////////////////////////////////////////////////
@@ -68,16 +76,15 @@ public class MasterTableDO extends TableDO {
      * @param tableName Table name
      * @param metadata Gives the column name and column data type
      * @param data Data as it is in the master table
-     * @param data_AO Data that is available and is ordered as per
-     *        the user. *Available Order* is done using the VSM_CHOICE_ORDER
+     * @param data_AO Data that is available and is ordered as per the user.
+     * *Available Order* is done using the VSM_CHOICE_ORDER
      */
     public MasterTableDO(String tableName, String[][] metadata,
-                         String[][] data, String[][] data_AO) {
+            String[][] data, String[][] data_AO) {
         super(tableName, metadata, data);
-        this.data_AO = data_AO;        
+        this.data_AO = data_AO;
     }
 
-    
     ////////////////////////////////////////////////////////////////////////
     // METHOD(S)
     ////////////////////////////////////////////////////////////////////////
@@ -100,17 +107,17 @@ public class MasterTableDO extends TableDO {
         if (data == null) {
             return null;
         }
-        
+
         // Get how many are disabled records
         int size = data.length - data_AO.length;
         int ncols = data[0].length;
         String[][] data_Disabled = new String[size][ncols];
-        
+
         // Check the number of disabled records
         if (size <= 0) {
             return null;
         }
-        
+
         // Make the list of the disabled data records
         int k = 0;
         boolean isFound = false;
@@ -123,7 +130,7 @@ public class MasterTableDO extends TableDO {
                     break;
                 }
             }
-            
+
             // If the record is not there in the data_AO, add it to
             // the data_Disabled
             if (!isFound) {
@@ -131,11 +138,11 @@ public class MasterTableDO extends TableDO {
                 k++;
             }
         }
-        
+
         // Return
         return data_Disabled;
     }
-    
+
     /**
      * Gets the entire codes.
      *
@@ -146,7 +153,7 @@ public class MasterTableDO extends TableDO {
     public String[] getCodes() throws ClientException {
         return getDataForColumn(IDX_CODE, data);
     }
-    
+
     /**
      * Gets the entire descriptions.
      *
@@ -157,7 +164,7 @@ public class MasterTableDO extends TableDO {
     public String[] getDescrs() throws ClientException {
         return getDataForColumn(IDX_DESCR, data);
     }
-    
+
     /**
      * Gets the *Available Ordered* codes.
      *
@@ -168,7 +175,7 @@ public class MasterTableDO extends TableDO {
     public String[] getCodes_AO() throws ClientException {
         return getDataForColumn(IDX_CODE, data_AO);
     }
-    
+
     /**
      * Gets the *Available Ordered* descriptions.
      *
@@ -179,7 +186,7 @@ public class MasterTableDO extends TableDO {
     public String[] getDescrs_AO() throws ClientException {
         return getDataForColumn(IDX_DESCR, data_AO);
     }
-    
+
     /**
      * Returns description for a given code.
      *
@@ -204,8 +211,8 @@ public class MasterTableDO extends TableDO {
 
         // As the control reaches here, something is wrong.
         // Throw an exception.
-        String msg = Debug.BUG +"DEV_ERROR : Ouch! Unknown code = " +code 
-                     +" passed to MasterTablesDO.getDesc()";
+        String msg = Debug.BUG + "DEV_ERROR : Ouch! Unknown code = " + code
+                + " passed to MasterTablesDO.getDesc()";
         Debug.log(msg);
         throw new ClientException(msg);
     }
@@ -230,13 +237,13 @@ public class MasterTableDO extends TableDO {
         for (int i = 0; i < data.length; i++) {
             if (desc.equals(data[i][1])) {
                 if (code != null) {
-                    throw new ClientException("ERROR : Duplicate Description found : " +desc);
+                    throw new ClientException("ERROR : Duplicate Description found : " + desc);
                 }
                 code = data[i][0];
                 // Iterate entire loop...
             }
         }
-        
+
         // Check if EXACTLY ONE Code is found. If yes return the code
         if (code != null) {
             return code;
@@ -244,13 +251,12 @@ public class MasterTableDO extends TableDO {
 
         // As the control reaches here, something is wrong.
         // Throw an exception.
-        String msg = Debug.BUG +"DEV_ERROR : Ouch! Unknown description = " +desc 
-                     +" passed to MasterTablesDO.getCode()";
+        String msg = Debug.BUG + "DEV_ERROR : Ouch! Unknown description = " + desc
+                + " passed to MasterTablesDO.getCode()";
         Debug.log(msg);
         throw new ClientException(msg);
     }
-    
-    
+
     /**
      * Method to return specific row.
      *
@@ -262,10 +268,10 @@ public class MasterTableDO extends TableDO {
                 return data[i];
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Get the form data in the form CODE:DESCR
      *
@@ -276,41 +282,41 @@ public class MasterTableDO extends TableDO {
         if (data_AO == null) {
             return null;
         }
-        
+
         // Return the first two columns interface CODE and DESCR
         String[][] fd = new String[data_AO.length][2];
         for (int i = 0; i < data_AO.length; i++) {
             fd[i][0] = data_AO[i][0];
-            fd[i][1] = data_AO[i][1];            
+            fd[i][1] = data_AO[i][1];
         }
         return fd;
     }
-    
+
     /**
      * Dump. Debug method to display the data.
      */
     public void dump() {
         // Dump TableDO data        
         super.dump();
-        
+
         // Dump data as per this object (MasterTableDO)
-        System.out.println("\n------------<<< " +tableName +" (Available Ordered Choice List) >>>------------");
-        for (int i = 0; i < metadata.length; i++) { 
-            for (int j = 0; j < metadata[0].length; j++) {            
+        System.out.println("\n------------<<< " + tableName + " (Available Ordered Choice List) >>>------------");
+        for (int i = 0; i < metadata.length; i++) {
+            for (int j = 0; j < metadata[0].length; j++) {
                 System.out.print(metadata[i][j]);
-                if (j != metadata[0].length-1) {
+                if (j != metadata[0].length - 1) {
                     System.out.print(" : ");
                 }
             }
-            System.out.println();            
+            System.out.println();
         }
-        
+
         System.out.println();
         for (int i = 0; data_AO != null && i < data_AO.length; i++) {
-            for (int j = 0; j < data_AO[0].length; j++) {            
+            for (int j = 0; j < data_AO[0].length; j++) {
                 System.out.print(data_AO[i][j]);
-                if (j != data_AO[0].length-1) {
-                    System.out.print(" : ");                
+                if (j != data_AO[0].length - 1) {
+                    System.out.print(" : ");
                 }
             }
             System.out.println();

@@ -33,7 +33,6 @@ public class ClientContext extends ClientObject implements Serializable {
     //////////////////////////////////////////////////////////////////
     // INSTANCE VARIABLES
     //////////////////////////////////////////////////////////////////
-
     /**
      * Session identifier
      */
@@ -55,8 +54,8 @@ public class ClientContext extends ClientObject implements Serializable {
      * Constructor
      */
     //public ClientContext(long sessionID, String userID) {
-    public ClientContext( String userID, String userName, String mobile, boolean activeInd,  String remarks) {
-     
+    public ClientContext(String userID, String userName, String mobile, boolean activeInd, String remarks) {
+
         this.userID = userID;
         this.userName = userName;
         this.mobile = mobile;
@@ -150,6 +149,5 @@ public class ClientContext extends ClientObject implements Serializable {
     public String toString() {
         return "ClientContext{" + "sessionID=" + sessionID + ", userID=" + userID + ", userName=" + userName + ", mobile=" + mobile + ", activeInd=" + activeInd + ", remarks=" + remarks + '}';
     }
-    
 
 }

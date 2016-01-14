@@ -27,9 +27,9 @@ import nic.java.util.InstanceCount;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 /**
- * This class is used for  configuring application properties like state code, rto code,  version,connection url,username,password,maximum connection etc
+ * This class is used for configuring application properties like state code,
+ * rto code, version,connection url,username,password,maximum connection etc
  *
  * @author NIC
  */
@@ -40,7 +40,7 @@ public class ApplicationConfig {
     ////////////////////////////////////////////////////////////////////////
     public static final String MERCHANT_CODE = "104";
     public static final int MERCHANT_CODE_NEW = 104;
-      public static final String ENC_DEC_KEY = "o@6^IND&";
+    public static final String ENC_DEC_KEY = "o@6^IND&";
     //for testing public static final String MERCHANT_CODE = "nat_permit";
     private static final String PROPERTY_FILE = "db";
     public static String RTO_PREFIX;

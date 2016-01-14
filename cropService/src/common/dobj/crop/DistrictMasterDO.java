@@ -17,8 +17,6 @@ public class DistrictMasterDO extends DO {
     private String distCd;
     private String distName;
 
-    
-    
     @Override
     public void reset() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

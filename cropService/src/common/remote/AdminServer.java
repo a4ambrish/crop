@@ -17,6 +17,7 @@ package common.remote;
 //
 // Importing standard java packages/classes
 //
+
 import java.rmi.*;
 import java.util.*;
 //
@@ -26,52 +27,52 @@ import common.*;
 import common.db.*;
 import common.context.*;
 
-
 /**
  * Admin role specific methods.
  */
 public interface AdminServer extends Remote {
+
     /**
-     * Returns a list of all the roles.
-     * The role 'admin' is not included in the list of roles.	 
-     * 
+     * Returns a list of all the roles. The role 'admin' is not included in the
+     * list of roles.
+     *
      * @return list of roles in key/value format
      *
      * @throws RemoteException
      * @throws ClientException
      */
-     String[][] getAllRoles() throws RemoteException, ClientException;
-    
+    String[][] getAllRoles() throws RemoteException, ClientException;
+
     /**
-     * Returns a list of all the users with the role 'cashier' 
-     * 
+     * Returns a list of all the users with the role 'cashier'
+     *
      * @return list of users in key/value format
      *
      * @throws RemoteException
      * @throws ClientException
-     */     
-     String[][] getUsersHavingCashierRole() throws RemoteException, ClientException;
+     */
+    String[][] getUsersHavingCashierRole() throws RemoteException, ClientException;
 
-     /**
+    /**
      * Returns a list of all the Services.
-     * 
+     *
      * @return list of Services in key/value format
      *
      * @throws RemoteException
      * @throws ClientException
      */
-     String[][] getAllServices() throws RemoteException, ClientException;
-     
+    String[][] getAllServices() throws RemoteException, ClientException;
+
     /**
-     * Returns a list of all the users.
-     * The user 'admin' is not included in the list of users.	 
-     * 
+     * Returns a list of all the users. The user 'admin' is not included in the
+     * list of users.
+     *
      * @return list of users in key/value format
      *
      * @throws RemoteException
      * @throws ClientException
      */
-     String[][] getAllUsers() throws RemoteException, ClientException;
+    String[][] getAllUsers() throws RemoteException, ClientException;
 
     /**
      * Saves the new role defined in the configure role form.
@@ -84,19 +85,21 @@ public interface AdminServer extends Remote {
      * @throws ClientException
      */
     void saveNewRole(String role, String descr, String[][] accessList) throws RemoteException, ClientException;
- 
+
     /**
-     * Returns the content of the table in which access to services is modified and list of services.
+     * Returns the content of the table in which access to services is modified
+     * and list of services.
      *
      * @param role role for which data is required
      *
-     * @return Hashtable returns the content of the table in which access to service is modified and list of services
+     * @return Hashtable returns the content of the table in which access to
+     * service is modified and list of services
      *
      * @throws RemoteException
      * @throws ClientException
      */
     Hashtable getRoleData(String role) throws RemoteException, ClientException;
-    
+
     /**
      * Saves an updated role modified in the configure role form.
      *
@@ -108,7 +111,7 @@ public interface AdminServer extends Remote {
      * @throws ClientException
      */
     void saveUpdatedRole(String role, String descr, String[][] accessList) throws RemoteException, ClientException;
-    
+
     /**
      * Saves a new user created in the configure user form.
      *
@@ -122,12 +125,13 @@ public interface AdminServer extends Remote {
      * @throws ClientException
      */
     void saveNewUser(String userid, String md5password, String comments, boolean disabled, Object[] roles) throws RemoteException, ClientException;
-    
+
     /**
      * Saves an updated user modified in the configure user form.
      *
      * @param userid User ID
-     * @param md5password password of the user - Encrypted using Encryption.md5()
+     * @param md5password password of the user - Encrypted using
+     * Encryption.md5()
      * @param comments description of the user
      * @param disabled flag if true means user is disabled, if false then not
      * @param roles list of roles for which user has rights
@@ -135,20 +139,21 @@ public interface AdminServer extends Remote {
      * @throws RemoteException
      * @throws ClientException
      */
-    void saveUpdatedUser(String userid, String md5password, String comments, boolean disabled, Object[] roles)  throws RemoteException, ClientException;
+    void saveUpdatedUser(String userid, String md5password, String comments, boolean disabled, Object[] roles) throws RemoteException, ClientException;
 
     /**
      * Fetches details of a user.
      *
      * @param userid User ID
      *
-     * @return String[] password, comments and disabled flag are returned in an array
+     * @return String[] password, comments and disabled flag are returned in an
+     * array
      *
      * @throws RemoteException
      * @throws ClientException
      */
     String[] getUserDetails(String userid) throws RemoteException, ClientException;
-    
+
     /**
      * Fetches details of all the roles for a user.
      *
@@ -160,7 +165,7 @@ public interface AdminServer extends Remote {
      * @throws ClientException
      */
     Hashtable getUserRoles(String userid) throws RemoteException, ClientException;
- 
+
     /**
      * Verify existing password and Saves the updated user password.
      *
@@ -169,7 +174,7 @@ public interface AdminServer extends Remote {
      * @param newmd5Password New password
      *
      * @return boolean true is returned when user password is successfully saved
-     *                 otherwise returns false
+     * otherwise returns false
      *
      * @throws RemoteException
      * @throws ClientException
@@ -179,35 +184,29 @@ public interface AdminServer extends Remote {
     /**
      * Method to get the currently logged in user sessions in a 2-D array
      *
-     * @return 2-D array with the session data record indexes:
-     *              [i][0] - UserId
-     *              [i][1] - Login time
-     *              [i][2] - Last Accessed
-     *              [i][3] - Auto Logout time left
-     *              [i][4] - User session ID
+     * @return 2-D array with the session data record indexes: [i][0] - UserId
+     * [i][1] - Login time [i][2] - Last Accessed [i][3] - Auto Logout time left
+     * [i][4] - User session ID
      *
      * @throws RemoteException when remote exception occurs
      */
     String[][] getCurrentSessions() throws RemoteException;
-    /**
-     * To save the user logging in into table VST_LOGIN_INFO
-     * with State Code and RTO Code.
-     * DIV21062008
-     */
-    
-    public void insertLoggedUserInfo(String userId, String stateName, String rtoName) throws RemoteException,ClientException;
-    
-     /**
-     * To delete the user logging in into table VST_LOGIN_INFO
-     * With Login Id.
-     * 
-     */
-    
-    public void insertLoggedOutUserInfo(String loginId) throws RemoteException,ClientException;
 
-   /**
+    /**
+     * To save the user logging in into table VST_LOGIN_INFO with State Code and
+     * RTO Code. DIV21062008
+     */
+    public void insertLoggedUserInfo(String userId, String stateName, String rtoName) throws RemoteException, ClientException;
+
+    /**
+     * To delete the user logging in into table VST_LOGIN_INFO With Login Id.
+     *
+     */
+    public void insertLoggedOutUserInfo(String loginId) throws RemoteException, ClientException;
+
+    /**
      * Method to get state name and rto name.
      */
     String[] getStateRtoName() throws RemoteException, ClientException;
- 
+
 }

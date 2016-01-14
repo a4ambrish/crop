@@ -10,6 +10,7 @@ package common.printing;
 //
 // Importing standard java packages/classes
 //
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -19,40 +20,45 @@ import javax.swing.*;
 //
 import common.printing.*;
 
-
 /**
  * Print Preview Panel
  */
 public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotionListener {
+
     /////////////////////////////////////////////////////////////////////////
     // CONSTANTS
     /////////////////////////////////////////////////////////////////////////
     private static final int WIDTH_TOOLTIP = 60;
     private static final int HEIGHT_TOOLTIP = 20;
-    private static final int HEIGHT_WINDOW_TITLE_BAR = 20;    
-    
+    private static final int HEIGHT_WINDOW_TITLE_BAR = 20;
+
     /////////////////////////////////////////////////////////////////////////
     // INSTANCE VARIABLES
     /////////////////////////////////////////////////////////////////////////
-    /** PrintData to display */
+    /**
+     * PrintData to display
+     */
     private PrintData pd;
-    
-    /** Flag to show the grid or not */
+
+    /**
+     * Flag to show the grid or not
+     */
     private boolean showGrid;
-    
-    /** GUI Frame */
+
+    /**
+     * GUI Frame
+     */
     private JFrame parent;
     private JWindow splash;
     private JTextField tf;
 
-    
     /////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR(S)
     /////////////////////////////////////////////////////////////////////////
     public PrintPreviewPanel(PrintData pd, boolean showGrid, JFrame parent) {
         this.pd = pd;
         this.showGrid = showGrid;
-        
+
         if (showGrid) {
             addMouseMotionListener(this);
             this.parent = parent;
@@ -69,7 +75,6 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
         }
     }
 
-    
     /////////////////////////////////////////////////////////////////////////
     // METHOD(S)
     /////////////////////////////////////////////////////////////////////////
@@ -84,21 +89,21 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
             Color gridColorMajor = new Color(170, 170, 170);
             Color gridColorMinor = new Color(220, 220, 220);
             Color gridColor;
-            for (int y = 0; y < 1000; y+=10) {
-                gridColor = (y%100 == 0) ? gridColorMajor : gridColorMinor;
+            for (int y = 0; y < 1000; y += 10) {
+                gridColor = (y % 100 == 0) ? gridColorMajor : gridColorMinor;
                 g.setColor(gridColor);
                 g.drawLine(0, y, 1000, y);
             }
-            for (int x = 0; x < 1000; x+=10) {
-                gridColor = (x%100 == 0) ? gridColorMajor : gridColorMinor;
+            for (int x = 0; x < 1000; x += 10) {
+                gridColor = (x % 100 == 0) ? gridColorMajor : gridColorMinor;
                 g.setColor(gridColor);
                 g.drawLine(x, 0, x, 1000);
             }
         }
-        
+
         // Set the background color black
         g.setColor(Color.black);
-        
+
         /**
          * Draw PrintLayout
          */
@@ -112,7 +117,7 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
             eleline = (ElementLine) lineElements.get(i);
             g.drawLine(eleline.getX1(), eleline.getY1(), eleline.getX2(), eleline.getY2());
         }
-        
+
         ElementLabel elelabel = null;
         int lableSize = labelElements.size();
         for (int i = 0; i < lableSize; i++) {
@@ -122,7 +127,7 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
 
         /**
          * Draw PrintValues
-         */        
+         */
         PrintValues pv = pd.getPrintValues();
         ArrayList valueElements = pv.getElementValues();
 
@@ -133,7 +138,7 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
             g.drawString(elevalue.getValue(), elevalue.getX(), elevalue.getY());
         }
     }
-    
+
     /**
      * Override the update method
      */
@@ -150,39 +155,38 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
         int y = (int) loc.getY();
         int w = parent.getWidth();
         int h = parent.getHeight();
-        
+
         int x1 = x + w - WIDTH_TOOLTIP;
         int y1 = y + h - HEIGHT_TOOLTIP;
         splash.setLocation(x1, y1);
     }
-    
+
     /**
      * Implement MouseMotionListener.mouseDragged()
      */
     public void mouseDragged(java.awt.event.MouseEvent mouseEvent) {
     }
-    
+
     /**
      * Implement MouseMotionListener.mouseMoved()
      */
     public void mouseMoved(java.awt.event.MouseEvent mouseEvent) {
         int x = mouseEvent.getX();
         int y = mouseEvent.getY();
-        tf.setText(x +"," +y);
+        tf.setText(x + "," + y);
         setTooltipLocation();
         splash.toFront();
         repaint();
     }
-    
+
     /**
-     * Set the position of the window. 
-     * Get the size of the parent and the child and set the child to
-     * the center of the parent. It will also check if the parent
-     * window is partly display in the screen then it will display child 
+     * Set the position of the window. Get the size of the parent and the child
+     * and set the child to the center of the parent. It will also check if the
+     * parent window is partly display in the screen then it will display child
      * window at appropiate place.
      *
      * @param parent parent window on which child will be set at its center
-     * @param child  child window  
+     * @param child child window
      */
     public static void centerWindow(java.awt.Window parent, java.awt.Window child) {
         // If the parent window is null then center the child window wrt
@@ -190,8 +194,8 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
         if (parent == null) {
             Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
             Rectangle frameDim = child.getBounds();
-            child.setLocation((screenDim.width-frameDim.width)/2,
-                              (screenDim.height-frameDim.height)/2);
+            child.setLocation((screenDim.width - frameDim.width) / 2,
+                    (screenDim.height - frameDim.height) / 2);
             return;
         }
 
@@ -219,30 +223,30 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
         // the dialog crosses the right and/or bottom of the screen.
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         p.x = ((p.x + childDim.width) < screen.width)
-                            ? p.x
-                            : (screen.width - childDim.width);
+                ? p.x
+                : (screen.width - childDim.width);
         p.y = ((p.y + childDim.height) < screen.height)
-                            ? p.y
-                            : (screen.height - childDim.height);
+                ? p.y
+                : (screen.height - childDim.height);
         // NOTE: The above code may not work properly in the case when the
         // dialog size is bigger than the screen size. Should avoid that.
         // Set the location of the child  
         child.setLocation(p);
     }
-    
+
     /**
-     *  Center the window wrt the desktop screen.
+     * Center the window wrt the desktop screen.
      *
-     *  @param window Window reference
+     * @param window Window reference
      */
     public static void centerWindow(java.awt.Window window) {
         centerWindow(null, window);
     }
-    
+
     /**
      * test
      */
-    public static void test(PrintData pd, boolean showGrid) throws PrintDataException  {
+    public static void test(PrintData pd, boolean showGrid) throws PrintDataException {
         JFrame f = new JFrame("Print Layout Config Preview");
         f.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -256,5 +260,5 @@ public class PrintPreviewPanel extends javax.swing.JPanel implements MouseMotion
         f.setSize(800, 600);
         centerWindow(f);
         f.setVisible(true);
-    }    
+    }
 }

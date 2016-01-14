@@ -17,6 +17,7 @@ package common.remote;
 //
 // Importing standard java packages/classes
 //
+
 import java.rmi.*;
 import java.util.*;
 //
@@ -25,14 +26,14 @@ import java.util.*;
 import common.*;
 import common.context.*;
 
-
 /**
  * User authentication specific methods.
  */
 public interface AuthServer extends Remote {
+
     /**
-     * Validates a user's id and password.
-     * throws exception when userid or password is not matching or when the user is disabled
+     * Validates a user's id and password. throws exception when userid or
+     * password is not matching or when the user is disabled
      *
      * @param userid User ID
      * @param password password of the user
@@ -41,12 +42,8 @@ public interface AuthServer extends Remote {
      *
      * @throws RemoteException
      * @throws ClientException
-     * @throws UserAuthenticationException 
+     * @throws UserAuthenticationException
      */
-    ClientContext authenticateUser(String userid, String saltedPassword, String saltKey,String poolName) throws RemoteException, ClientException, UserAuthenticationException;
-    
-   
- 
-  
+    ClientContext authenticateUser(String userid, String saltedPassword, String saltKey, String poolName) throws RemoteException, ClientException, UserAuthenticationException;
 
 }

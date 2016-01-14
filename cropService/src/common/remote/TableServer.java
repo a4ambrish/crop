@@ -20,6 +20,7 @@ package common.remote;
 //
 // Importing standard java packages/classes
 //
+
 import java.rmi.*;
 import java.util.*;
 //
@@ -34,32 +35,30 @@ import common.dobj.crop.StateMasterDO;
 import common.dobj.crop.TehsilMasterDO;
 import common.dobj.crop.VillageMasterDO;
 
-
 /**
- * Table data Server Remote Interface. Provides Database specific
- * methods for  System on client side.
+ * Table data Server Remote Interface. Provides Database specific methods for
+ * System on client side.
  */
 public interface TableServer extends Remote {
-    /** 
-     * Returns serialized (local) master table Data Objects (DO).
-     * This is object that the client will be using to fill all the
-     * forms for most of the comboboxes. The MasterTables contains
-     * the list of the master table DO objects that contains the
-     * data from the master tables at the time of Server Startup. That
-     * means any changes in the Master Tables thereafter will not
-     * be reflected in the  Client/Server till the  Server
-     * is restarted.
+
+    /**
+     * Returns serialized (local) master table Data Objects (DO). This is object
+     * that the client will be using to fill all the forms for most of the
+     * comboboxes. The MasterTables contains the list of the master table DO
+     * objects that contains the data from the master tables at the time of
+     * Server Startup. That means any changes in the Master Tables thereafter
+     * will not be reflected in the Client/Server till the Server is restarted.
      *
-     * @return MasterTables object having the list of the individual
-     *         MasterTable Java DO.
+     * @return MasterTables object having the list of the individual MasterTable
+     * Java DO.
      *
      * @throws RemoteException
      */
     MasterTables getStoredMasterTables() throws RemoteException;
-    
-    /** 
-     * Get the data from Database and not from the stored tables
-     * data in MasterTables
+
+    /**
+     * Get the data from Database and not from the stored tables data in
+     * MasterTables
      *
      * @param tableName Master Table Name
      *
@@ -69,8 +68,8 @@ public interface TableServer extends Remote {
      * @throws ClientException
      */
     MasterTableDO getDynamicMasterTableDO(String tableName) throws RemoteException, ClientException;
-    
-    /** 
+
+    /**
      * Get the data from Database and not from the stored tables data in Tables
      *
      * @param tableName Table Name
@@ -81,10 +80,10 @@ public interface TableServer extends Remote {
      * @throws ClientException
      */
     TableDO getDynamicTableDO(String tableName) throws RemoteException, ClientException;
-    
+
     /**
-     * Return the list of the master table names. This list is
-     * generated only once on the server.
+     * Return the list of the master table names. This list is generated only
+     * once on the server.
      *
      * @return List of the Master Tables (picked from VSM_CHOICE_ORDER)
      *
@@ -92,7 +91,7 @@ public interface TableServer extends Remote {
      * @throws ClientException
      */
     String[][] getMasterTableList() throws RemoteException, ClientException;
-    
+
     /**
      * Insert/Update/Delete
      *
@@ -104,10 +103,14 @@ public interface TableServer extends Remote {
      * @throws ClientException
      */
     int execIUDSQL(String sql) throws RemoteException, ClientException;
-    
-    ArrayList <StateMasterDO> loadStateMasterList() throws ClientException;
-    ArrayList <DistrictMasterDO> loadDistrictMasterList() throws ClientException;
-    ArrayList <TehsilMasterDO> loadTehsilMasterList() throws ClientException;
-    ArrayList <VillageMasterDO> loadVillageMasterList() throws ClientException;
-    ArrayList <CropMasterDO> loadCropMasterList() throws ClientException;
+
+    ArrayList<StateMasterDO> loadStateMasterList() throws ClientException;
+
+    ArrayList<DistrictMasterDO> loadDistrictMasterList() throws ClientException;
+
+    ArrayList<TehsilMasterDO> loadTehsilMasterList() throws ClientException;
+
+    ArrayList<VillageMasterDO> loadVillageMasterList() throws ClientException;
+
+    ArrayList<CropMasterDO> loadCropMasterList() throws ClientException;
 }

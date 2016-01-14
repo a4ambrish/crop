@@ -11,8 +11,8 @@ import common.dobj.DO;
  *
  * @author ambrish
  */
-public class VillageMasterDO extends DO{
-    
+public class VillageMasterDO extends DO {
+
     private String stateUT;
     private String distCd;
     private String tehsCd;
@@ -98,9 +98,5 @@ public class VillageMasterDO extends DO{
     public String dump() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    
-    
+
 }

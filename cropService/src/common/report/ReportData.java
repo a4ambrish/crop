@@ -19,6 +19,7 @@ package common.report;
 //
 // Importing standard java packages/classes
 //
+
 import java.io.*;
 //
 // Importing Client/Common java packages/classes
@@ -27,90 +28,121 @@ import java.io.*;
 import common.*;
 import nic.java.util.*;
 
-
 /**
- *  specific Report data.
+ * specific Report data.
  *
  * @author AKT
  */
 public class ReportData implements Serializable {
+
     ////////////////////////////////////////////////////////////////////////
     // CONSTANTS
     ////////////////////////////////////////////////////////////////////////
-    /** Vehicle Report */
-    public static final int REPORT_VEH_GENERAL       = 1;
-    
-    /** Vehicle Fitness Report */
-    public static final int REPORT_VEH_FITNESS       = 2;
-    
-    /** Vehicle Search Report */
-    public static final int REPORT_VEH_SEARCH        = 3;
-    
-    /** Vehicle Permit Report */
-    public static final int REPORT_VEH_PERMIT        = 4;
-    
-    /** Backlog User Report */
-    public static final int REPORT_VEH_BACKLOG       = 5;
-    
-    /** Tax Clearance Certificate */
-    public static final int REPORT_VEH_TCC           = 6;
-   
-    /** Demand Notice */
+    /**
+     * Vehicle Report
+     */
+    public static final int REPORT_VEH_GENERAL = 1;
+
+    /**
+     * Vehicle Fitness Report
+     */
+    public static final int REPORT_VEH_FITNESS = 2;
+
+    /**
+     * Vehicle Search Report
+     */
+    public static final int REPORT_VEH_SEARCH = 3;
+
+    /**
+     * Vehicle Permit Report
+     */
+    public static final int REPORT_VEH_PERMIT = 4;
+
+    /**
+     * Backlog User Report
+     */
+    public static final int REPORT_VEH_BACKLOG = 5;
+
+    /**
+     * Tax Clearance Certificate
+     */
+    public static final int REPORT_VEH_TCC = 6;
+
+    /**
+     * Demand Notice
+     */
     public static final int REPORT_VEH_DEMAND_NOTICE = 7;
-    
-    /** Tax Statement */
+
+    /**
+     * Tax Statement
+     */
     public static final int REPORT_VEH_TAX_STATEMENT = 8;
-    
-    /** Registration Certificate Report */
-    public static final int REPORT_RC                = 9;    
 
-    /** Audit Recovery Report */
-    public static final int REPORT_AUDIT_RECOVERY    = 10;
-    
-    /** Balance Tax Report */
-    public static final int REPORT_BAL_TAX           = 11;
-    
-    /** Tax Exempted Report */
-    public static final int REPORT_TAX_EXEMPTED      = 12;
+    /**
+     * Registration Certificate Report
+     */
+    public static final int REPORT_RC = 9;
 
-    /** Day End Cash Satement Report */
-    public static final int REPORT_ACC_STAT          = 13;    
-   
-    /** Audit Report */
-    public static final int REPORT_AUDIT_REPORT      = 14;
-    
-     public static final int REPORT_VEH_MISC          = 15;
-    
-    public static final int REPORT_THEFT_REPORT            =18;
-     
-     public static final int REPORT_TEMP_VEH                =19;
-    
-     public static final int REPORT_VERIFY_TRANS            =20;
-     
-     public static final int REPORT_APROV_TRANS             =21;
-     
-     public static final int REPORT_NOC_VEH             =22;
- 
-     public static final int      REP_COUNT_REGISTER_VEHICLE      =23;
-     
-     public static final int      REP_ONLINE_TAX_TOKEN_PRINT      =24;
-     
-     public static final int      REP_ONLINE_TAX_CLEAR            =25;
-     
-     public static final int      REP_ONLINE_TAX_POSTAL_CHARGE    =26;
-     
-     public static final int                      REPORT_SCREEN   = 27;
-     
+    /**
+     * Audit Recovery Report
+     */
+    public static final int REPORT_AUDIT_RECOVERY = 10;
+
+    /**
+     * Balance Tax Report
+     */
+    public static final int REPORT_BAL_TAX = 11;
+
+    /**
+     * Tax Exempted Report
+     */
+    public static final int REPORT_TAX_EXEMPTED = 12;
+
+    /**
+     * Day End Cash Satement Report
+     */
+    public static final int REPORT_ACC_STAT = 13;
+
+    /**
+     * Audit Report
+     */
+    public static final int REPORT_AUDIT_REPORT = 14;
+
+    public static final int REPORT_VEH_MISC = 15;
+
+    public static final int REPORT_THEFT_REPORT = 18;
+
+    public static final int REPORT_TEMP_VEH = 19;
+
+    public static final int REPORT_VERIFY_TRANS = 20;
+
+    public static final int REPORT_APROV_TRANS = 21;
+
+    public static final int REPORT_NOC_VEH = 22;
+
+    public static final int REP_COUNT_REGISTER_VEHICLE = 23;
+
+    public static final int REP_ONLINE_TAX_TOKEN_PRINT = 24;
+
+    public static final int REP_ONLINE_TAX_CLEAR = 25;
+
+    public static final int REP_ONLINE_TAX_POSTAL_CHARGE = 26;
+
+    public static final int REPORT_SCREEN = 27;
+
     ////////////////////////////////////////////////////////////////////////
     // VARIABLE
     ////////////////////////////////////////////////////////////////////////
-    /** Report Type */
+    /**
+     * Report Type
+     */
     private int type;
-    
-    /** Report Data */
+
+    /**
+     * Report Data
+     */
     private String[][] data;
-    
-    
+
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS
     ////////////////////////////////////////////////////////////////////////
@@ -124,7 +156,7 @@ public class ReportData implements Serializable {
         this.data = data;
         this.type = type;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////
     // METHODS
     ///////////////////////////////////////////////////////////////////////
@@ -136,7 +168,7 @@ public class ReportData implements Serializable {
     public int getType() {
         return type;
     }
-    
+
     /**
      * Get the data
      *

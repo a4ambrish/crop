@@ -53,8 +53,8 @@ public class LoginBean implements Serializable {
         ClientContext ctx = null;
         UserAuthenticationException uae = null;
         try {
-                      ctx = ModuleServer.authServer().authenticateUser(loginId, password, randomCopy, null);
-            
+            ctx = ModuleServer.authServer().authenticateUser(loginId, password, randomCopy, null);
+
         } catch (UserAuthenticationException ce) {
             uae = ce;
         } catch (ClientException ce) {

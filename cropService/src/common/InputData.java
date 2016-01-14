@@ -14,6 +14,7 @@ package common;
 //
 // Importing standard java packages/classes
 //
+
 import java.io.*;
 import java.util.*;
 //
@@ -22,34 +23,33 @@ import java.util.*;
 import common.*;
 import common.context.*;
 
-
 /**
  * Input Data used to load a DO object
  *
  * @author GUM
  */
 public class InputData extends ClientObject implements Serializable {
+
     /**
      * ClientContext object has all data related to a user and his session
-     */    
+     */
     private ClientContext clientContext;
-    
+
     /**
-     * List of the arguments that need to be passed to load a DO object.
-     * These arguments must be processed individually by the concerned
-     * makeDO method. The list can contain any kind of arguments and
-     * it is the responsibility of the makeDO method called to process
-     * them appropriately.
+     * List of the arguments that need to be passed to load a DO object. These
+     * arguments must be processed individually by the concerned makeDO method.
+     * The list can contain any kind of arguments and it is the responsibility
+     * of the makeDO method called to process them appropriately.
      */
     private Object[] args;
-    
-    /** 
+
+    /**
      * Service ID (as per ServiceIds.java)
      *
      * @see ServiceIds
      */
     private int serviceID;
-    
+
     /**
      * Operation ID (as per OperationIds.java)
      *
@@ -57,60 +57,54 @@ public class InputData extends ClientObject implements Serializable {
      */
     private int operationID;
 
-
     /////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS
     /////////////////////////////////////////////////////////////////////
-    /** 
+    /**
      * Empty constructor, creates blank FormData object.
      */
     public InputData() {
     }
-    
-    /** 
-     * Constructor initializing the InputData object with the passed
-     * values.
+
+    /**
+     * Constructor initializing the InputData object with the passed values.
      *
-     * @param clientContext ClientContext object has all data related to
-     *                      a user and his session
-     * @param args List of the arguments that need to be passed to 
-     *             load a DO object. These arguments must be processed 
-     *             individually by the concerned makeDO method. The list
-     *             can contain any kind of arguments and it is the
-     *             responsibility of the makeDO method called to process
-     *             them appropriately.
+     * @param clientContext ClientContext object has all data related to a user
+     * and his session
+     * @param args List of the arguments that need to be passed to load a DO
+     * object. These arguments must be processed individually by the concerned
+     * makeDO method. The list can contain any kind of arguments and it is the
+     * responsibility of the makeDO method called to process them appropriately.
      * @param serviceID Service ID (as per ServiceIds.java)
      * @param operationID Operation ID (as per OperationIds.java)
      */
-    public InputData(ClientContext clientContext, Object[] args, 
-                     int serviceID, int operationID) {
-                         
+    public InputData(ClientContext clientContext, Object[] args,
+            int serviceID, int operationID) {
+
         init(clientContext, args, serviceID, operationID);
     }
-    
+
     /**
      * Initializes all the instance data of this object
      *
-     * @param clientContext ClientContext object has all data related to
-     *                      a user and his session
-     * @param args List of the arguments that need to be passed to 
-     *             load a DO object. These arguments must be processed 
-     *             individually by the concerned makeDO method. The list
-     *             can contain any kind of arguments and it is the
-     *             responsibility of the makeDO method called to process
-     *             them appropriately.
+     * @param clientContext ClientContext object has all data related to a user
+     * and his session
+     * @param args List of the arguments that need to be passed to load a DO
+     * object. These arguments must be processed individually by the concerned
+     * makeDO method. The list can contain any kind of arguments and it is the
+     * responsibility of the makeDO method called to process them appropriately.
      * @param serviceID Service ID (as per ServiceIds.java)
      * @param operationID Operation ID (as per OperationIds.java)
-     */    
+     */
     public void init(ClientContext clientContext, Object[] args,
-                     int serviceID, int operationID) {
-                         
+            int serviceID, int operationID) {
+
         this.clientContext = clientContext;
         this.args = args;
         this.serviceID = serviceID;
-        this.operationID = operationID;    
+        this.operationID = operationID;
     }
-    
+
     ////////////////////////////////////////////////////////////////////
     // GETTER Methods
     ////////////////////////////////////////////////////////////////////
@@ -122,7 +116,7 @@ public class InputData extends ClientObject implements Serializable {
     public ClientContext getClientContext() {
         return clientContext;
     }
-    
+
     /**
      * Get the data arguments array.
      *
@@ -140,7 +134,7 @@ public class InputData extends ClientObject implements Serializable {
     public int getServiceID() {
         return serviceID;
     }
-    
+
     /**
      * Get the operation ID.
      *
@@ -161,7 +155,7 @@ public class InputData extends ClientObject implements Serializable {
     public void setClientContext(ClientContext clientContext) {
         this.clientContext = clientContext;
     }
-    
+
     /**
      * Set the argument array.
      *
@@ -179,7 +173,7 @@ public class InputData extends ClientObject implements Serializable {
     public void setServiceID(int serviceID) {
         this.serviceID = serviceID;
     }
-    
+
     /**
      * Set the operation ID.
      *

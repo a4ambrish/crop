@@ -37,17 +37,17 @@ import common.ClientException;
  * </PRE>
  *
  * <BR>
- * This class must be used carefully. One should call .commit() method
- * only once. If you call it more than once without calling reset() first
- * then a SQLException will be thrown. If you want to re-utilize the
- * TransactionManager object then you must first done with it (ie call
- * commit())and then call reset() method. Once you call reset() method then
- * you are ready for using it for another transaction.
+ * This class must be used carefully. One should call .commit() method only
+ * once. If you call it more than once without calling reset() first then a
+ * SQLException will be thrown. If you want to re-utilize the TransactionManager
+ * object then you must first done with it (ie call commit())and then call
+ * reset() method. Once you call reset() method then you are ready for using it
+ * for another transaction.
  *
  * <BR>
- * User of this class should not bother about the database resoureces. Also
- * they should not bother about rollback. All user should bother about are
- * following four points...
+ * User of this class should not bother about the database resoureces. Also they
+ * should not bother about rollback. All user should bother about are following
+ * four points...
  * <PRE>
  *   1. Create TransactionManager object  [ new TransactionManager(whereiam) ]
  *   2. Execute DML statements on it      [ tmgr.executeDML(sql) ]
@@ -92,49 +92,68 @@ public class TransactionManagerRemote {
     // VARIABLES
     ///////////////////////////////////////////////////////////////////////
 
-    /** String to show where the transaction is happening. This is
-     * mainly for debugging purpose.
-     * eg "PDOFormPermitGoodsRestore.updatePermitRestoreGoodsPermit()" */
+    /**
+     * String to show where the transaction is happening. This is mainly for
+     * debugging purpose. eg
+     * "PDOFormPermitGoodsRestore.updatePermitRestoreGoodsPermit()"
+     */
     private String whereiam;
-    /** Transaction ID. Every time a transaction manager object is created
-     * a ID number is assigned to it. Also when reset() method is called
-     * a new id number is assigned. */
+    /**
+     * Transaction ID. Every time a transaction manager object is created a ID
+     * number is assigned to it. Also when reset() method is called a new id
+     * number is assigned.
+     */
     private int transactionID;
-    /** Counter used for generating transactionID. */
+    /**
+     * Counter used for generating transactionID.
+     */
     private static int transactionCounter = 0;
-    /** Counter used for remembering released transaction manager objects.
-     * This is primarily for Debugging purpose. */
+    /**
+     * Counter used for remembering released transaction manager objects. This
+     * is primarily for Debugging purpose.
+     */
     private static int releasedTransactionCounter = 0;
-    /** Database connection. Connection will be called from a database
-     * connection pool at the time of creation of the this object and at the
-     * time of reset() method call. */
+    /**
+     * Database connection. Connection will be called from a database connection
+     * pool at the time of creation of the this object and at the time of
+     * reset() method call.
+     */
     private Connection con;
-    /** Database statement. Statement object will be created the moment
+    /**
+     * Database statement. Statement object will be created the moment
      * connection object is called from a connection pool in the
-     * constructor/reset(). */
+     * constructor/reset().
+     */
     private Statement stmt;
-    /** Database PreparedStatement statement. PreparedStatement object will
-     * be created when the user calls tmgr.prepareStatement(sql).
-     * User should call the prepareStatement(sql) that returns this ref
-     * only once. If user calls more than once then SQLException will be
-     * thrown. */
+    /**
+     * Database PreparedStatement statement. PreparedStatement object will be
+     * created when the user calls tmgr.prepareStatement(sql). User should call
+     * the prepareStatement(sql) that returns this ref only once. If user calls
+     * more than once then SQLException will be thrown.
+     */
     private PreparedStatement prstmt;
-    /** List of the DML sql statements that this transaction executed. */
+    /**
+     * List of the DML sql statements that this transaction executed.
+     */
     private ArrayList sqlList = new ArrayList();
-    /** Flag to check if transaction finished without any exception.
-     * This flag will be 'false' when this object is created and till the
-     * user calls commit(). If commit() goes fine than this flag is set as
-     * 'true' */
+    /**
+     * Flag to check if transaction finished without any exception. This flag
+     * will be 'false' when this object is created and till the user calls
+     * commit(). If commit() goes fine than this flag is set as 'true'
+     */
     private boolean transactionSuccessfull;
-    /** Flag to ensure that the commit() is called only once.
-     * This flag will be 'false' when this object is created and till the
-     * user calls commit() irrespective of commit succeed or fail. Once commit()
-     * is called this flag is set as 'true'. This is to ensure that no one call
-     * the commit() method more than once. If user has to re-use this object
-     * then he must call reset() method that sets this flag to 'false'
-     * alongwith other flags etc */
+    /**
+     * Flag to ensure that the commit() is called only once. This flag will be
+     * 'false' when this object is created and till the user calls commit()
+     * irrespective of commit succeed or fail. Once commit() is called this flag
+     * is set as 'true'. This is to ensure that no one call the commit() method
+     * more than once. If user has to re-use this object then he must call
+     * reset() method that sets this flag to 'false' alongwith other flags etc
+     */
     private boolean commitHasBeenCalledAlready;
-    /** Flag to indicate if the transaction is released or not */
+    /**
+     * Flag to indicate if the transaction is released or not
+     */
     private boolean released;
 
     ///////////////////////////////////////////////////////////////////////
@@ -144,8 +163,8 @@ public class TransactionManagerRemote {
      * Constructor.
      *
      * @param whereiam String to show from where the transaction is happening.
-     *        This is mainly for debugging purpose.
-     *        eg "PDOFormPermitGoodsRestore.updatePermitRestoreGoodsPermit()"
+     * This is mainly for debugging purpose. eg
+     * "PDOFormPermitGoodsRestore.updatePermitRestoreGoodsPermit()"
      *
      * @throws SQLException
      */
@@ -154,11 +173,12 @@ public class TransactionManagerRemote {
         // InstanceCount.add(this);
     }
 
-    /** Override finalize() */
+    /**
+     * Override finalize()
+     */
     public void finalize() {
 
         // InstanceCount.remove(this);
-
         // Release the resources if it is not released.
         // The following code will be executed only when the developer has not
         // called tmgr.release() explicitly in his transaction handling code.
@@ -176,11 +196,11 @@ public class TransactionManagerRemote {
     ///////////////////////////////////////////////////////////////////////
     /**
      * Initialize this object. This private method must be called only by
-     * constructor or reset() method that makes this object just like a
-     * new TransactionManager object.
+     * constructor or reset() method that makes this object just like a new
+     * TransactionManager object.
      *
-     * @param whereiam String showing where the transaction is happening.
-     *        eg "PDOFormPermitGoodsRestore.updatePermitRestoreGoodsPermit()"
+     * @param whereiam String showing where the transaction is happening. eg
+     * "PDOFormPermitGoodsRestore.updatePermitRestoreGoodsPermit()"
      */
     private void initialize(String whereiam) throws SQLException {
         transactionID = ++transactionCounter;
@@ -245,8 +265,8 @@ public class TransactionManagerRemote {
     }
 
     /**
-     * Commit the transaction. If the commit() goes fine then this method
-     * sets the flag 'transactionSuccessfull' as true.
+     * Commit the transaction. If the commit() goes fine then this method sets
+     * the flag 'transactionSuccessfull' as true.
      *
      * @throws SQLException when commit fails
      */
@@ -270,7 +290,6 @@ public class TransactionManagerRemote {
 
         // Control reaches here means transaction is successfull
         transactionSuccessfull = true;
-
 
         // Log transaction commit successfull
         Debug.logtnx(formattedTransactionID() + ":) ...Transaction committed successfully... " + whereiam);
@@ -300,7 +319,6 @@ public class TransactionManagerRemote {
         released = true;
 
         // If the PreparedStatement is created by the user then close it.
-
         try {
             if (prstmt != null) {
                 prstmt.close();
@@ -319,9 +337,8 @@ public class TransactionManagerRemote {
     }
 
     /**
-     * Returns the PreparedStatement.
-     * User should call the prepareStatement(sql) only once. If user calls
-     * more than once then SQLException will be thrown.
+     * Returns the PreparedStatement. User should call the prepareStatement(sql)
+     * only once. If user calls more than once then SQLException will be thrown.
      *
      * @param sql given prepared sql.
      *
@@ -426,7 +443,6 @@ public class TransactionManagerRemote {
 
         // Log the SQL
         //Debug.logsql("[   1   ] " + iudSQL);
-
         // Connection/Statement
         Connection con = null;
         Statement stmt = null;

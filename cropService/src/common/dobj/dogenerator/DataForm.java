@@ -18,30 +18,38 @@ package common.dobj.dogenerator;
 //
 // Importing standard java packages/classes
 //
-import java.util.*;
 
+import java.util.*;
 
 /**
  * Represents a Form data.
  *
  * @author RCN
- */ 
+ */
 public class DataForm {
+
     ///////////////////////////////////////////////////////////////////////
     // INSTANCE VARIABLES 
     ///////////////////////////////////////////////////////////////////////
-    /** Form name */
+    /**
+     * Form name
+     */
     private String name;
- 
-    /** Package Name */
+
+    /**
+     * Package Name
+     */
     private String pkg;
 
-    /** Form description */
+    /**
+     * Form description
+     */
     private String description;
-  
-    /** List of DataFields */ 
-    private ArrayList dataFields = new ArrayList();
 
+    /**
+     * List of DataFields
+     */
+    private ArrayList dataFields = new ArrayList();
 
     ///////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS
@@ -53,7 +61,7 @@ public class DataForm {
      * @param pkg is the pkg name
      * @param name is the name of the form
      */
-    public DataForm(String name, String pkg, String description)  {
+    public DataForm(String name, String pkg, String description) {
         this.name = name;
         this.pkg = pkg;
         this.description = description;
@@ -62,24 +70,24 @@ public class DataForm {
     ///////////////////////////////////////////////////////////////////////
     // METHODS
     ///////////////////////////////////////////////////////////////////////
-    /** 
-     * Adds a Data Field 
+    /**
+     * Adds a Data Field
      */
     public DataField addDataField(String name, String dbtype, String dv,
-                                  String ll, String ul,
-                                  String tt, String desc,
-                                  String formNullable, String tableName)
+            String ll, String ul,
+            String tt, String desc,
+            String formNullable, String tableName)
             throws DataFieldException {
 
         DataField field = new DataField(name, dbtype, dv,
-                                        ll, ul,
-                                        tt, desc,
-                                        formNullable, tableName);
+                ll, ul,
+                tt, desc,
+                formNullable, tableName);
         dataFields.add(field);
-        
+
         return field;
     }
- 
+
     /**
      * Get the Data Field list.
      */
@@ -88,12 +96,12 @@ public class DataForm {
         if (size == 0) {
             return null;
         }
-  
+
         DataField[] fields = new DataField[size];
         for (int i = 0; i < size; i++) {
             fields[i] = (DataField) dataFields.get(i);
         }
- 
+
         return fields;
     }
 
@@ -112,36 +120,34 @@ public class DataForm {
         return description;
     }
 
-    
     /**
      * Dump method
      */
     public String dump() {
         StringBuffer data = new StringBuffer(""
-            +"--------------------------------------------------------"
-            +DataField.NEW_LINE
-            +" name = " +name
-            +" package = " +pkg
-            +" description = " +description
-            +DataField.NEW_LINE
-            +"--------------------------------------------------------"
-            +DataField.NEW_LINE
-            +DataField.dumpStructure()
-            +DataField.NEW_LINE);
-        
+                + "--------------------------------------------------------"
+                + DataField.NEW_LINE
+                + " name = " + name
+                + " package = " + pkg
+                + " description = " + description
+                + DataField.NEW_LINE
+                + "--------------------------------------------------------"
+                + DataField.NEW_LINE
+                + DataField.dumpStructure()
+                + DataField.NEW_LINE);
+
         int size = dataFields.size();
         if (size == 0) {
             data.append("ERROR : No DataFields in the Form. This is not allowed."
-                        +DataField.NEW_LINE);
-        }
-        else {
+                    + DataField.NEW_LINE);
+        } else {
             DataField df = null;
             for (int i = 0; i < size; i++) {
                 df = (DataField) dataFields.get(i);
-                data.append(df.dump() +DataField.NEW_LINE);
+                data.append(df.dump() + DataField.NEW_LINE);
             }
         }
-        
+
         return data.toString();
     }
 }

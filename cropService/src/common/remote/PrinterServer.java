@@ -17,6 +17,7 @@ package common.remote;
 //
 // Importing standard java packages/classes
 //
+
 import java.rmi.*;
 //
 // Importing Common java packages/classes
@@ -30,7 +31,7 @@ import common.printing.*;
  * @author GUM
  */
 public interface PrinterServer extends Remote {
-    
+
     /**
      * Generate Receipt print data for given Receipt Number.
      *
@@ -38,10 +39,10 @@ public interface PrinterServer extends Remote {
      * @param rcptType Recipt Type
      *
      * @return Print Data object for the receipt
-     */    
+     */
     PrintData makeReceiptPrintData(String receiptNo, int rcptType)
-            throws RemoteException, ClientException;    
-    
+            throws RemoteException, ClientException;
+
     /**
      * Generate Certificate print data for given Vehicle Number.
      *
@@ -49,48 +50,46 @@ public interface PrinterServer extends Remote {
      * @param vehType Vehicle Type
      *
      * @return Print Data object for the receipt
-     */    
+     */
     PrintData makeCertificatePrintDataByVehicleNo(String vehNo, int vehType)
-            throws RemoteException, ClientException;    
-    
+            throws RemoteException, ClientException;
+
     /**
-     * Generate Certificate print data for given Receipt Number. 
+     * Generate Certificate print data for given Receipt Number.
      *
-     * @param receiptNo Receipt Number     
+     * @param receiptNo Receipt Number
      * @param rcptType Recipt Type
      *
      * @return Print Data object for Certificate
-     */    
+     */
     PrintData makeCertificatePrintDataByReceiptNo(String receiptNo, int rcptType)
             throws RemoteException, ClientException;
-   
+
     /**
      * Generate Register print data for given Registration Dates.
      *
      * @param regnDate1 Registration date Lower Limit.
      * @param regnDate2 Registration date Upper Limit.
      * @param vehType Vehicle Type
-     * 
+     *
      * @return Print Data object for Register Printing
      */
     PrintData makeRegisterPrintData(String regnDate1, String regnDate2, int vehType)
-            throws RemoteException, ClientException;   
-    
+            throws RemoteException, ClientException;
+
     /**
      * Generate Owner Acceptance Form print data for given Receipt No.
      *
      * @param receiptNo Receipt No
      * @param vehNo Vehicle Number
-     * @param vehType Vehicle Type 
+     * @param vehType Vehicle Type
      *
      * @return Print Data object for Owner Accept Printing
-     */   
+     */
+    PrintData makePrintUserAcceptanceForm(String receiptNo, String VehNo, int vehType)
+            throws RemoteException, ClientException;
 
-    PrintData makePrintUserAcceptanceForm(String receiptNo,String VehNo,int vehType)
-            throws RemoteException, ClientException;  	
-    
-        // Added By Prashant Kumar Singh -- 4_aug_2010
-    PrintData makeForm20forVehicle(String madeVehno,int printConstant)     throws RemoteException, ClientException;  			
-    
+    // Added By Prashant Kumar Singh -- 4_aug_2010
+    PrintData makeForm20forVehicle(String madeVehno, int printConstant) throws RemoteException, ClientException;
 
 }

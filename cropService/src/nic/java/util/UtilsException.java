@@ -16,13 +16,13 @@ package nic.java.util;
 //
 // NONE 
 
-
 /**
  * Top level Exception for utility methods in Utils classes
  *
  * @author RCN
  */
 public class UtilsException extends Exception {
+
     /**
      * Constructor
      */
@@ -36,13 +36,13 @@ public class UtilsException extends Exception {
      */
     public UtilsException(String msg) {
         super(msg);
-        InstanceCount.add(this);        
+        InstanceCount.add(this);
     }
-    
-    /** 
-     * Override finalize() 
+
+    /**
+     * Override finalize()
      */
     public void finalize() {
         InstanceCount.remove(this);
-    }    
+    }
 }

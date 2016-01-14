@@ -24,6 +24,7 @@ package common.db;
 //
 // Importing standard java packages/classes
 //
+
 import java.sql.*;
 import java.util.*;
 import java.io.*;
@@ -31,7 +32,6 @@ import java.io.*;
 // Importing Common java packages/classes
 //
 import common.*;
-
 
 /**
  * Loads all the master table database as Java Objects.
@@ -42,6 +42,7 @@ public class MasterTables extends ClientObject implements Serializable {
     /*
      * Master Table Read-Only Objects
      */
+
     //.........................................
     // CODE/DESCR based master tables
     //.........................................
@@ -89,20 +90,19 @@ public class MasterTables extends ClientObject implements Serializable {
     public MasterTableDO VM_DISTRICT;
     public MasterTableDO VM_RTO_CODE; // DIV21July2008
     //DIV 09-02-2009
-    public MasterTableDO VM_FRC_REASON;  
+    public MasterTableDO VM_FRC_REASON;
     //...........................................................
     // Non CODE/DESCR based master tables
     //...........................................................
     public MasterTableDO VM_ROUTE_MASTER;
     public MasterTableDO VM_VIA_MASTER;
     public MasterTableDO VM_USERS;
-    
+
     //kml 02-02-2009
     public MasterTableDO VM_KIT_MFG;
-    public MasterTableDO VM_KIT_TYPE;    
-    public MasterTableDO VM_KIT_WORKSHOP; 
-    
-    
+    public MasterTableDO VM_KIT_TYPE;
+    public MasterTableDO VM_KIT_WORKSHOP;
+
     //...........................................................
     // Master Tables for which only TableDO to be made.
     // These are the tables which does not contain the PK column.
@@ -110,21 +110,19 @@ public class MasterTables extends ClientObject implements Serializable {
     // on more than one column.
     //...........................................................
     public TableDO VM_ACTION;
-    public TableDO VM_OFFENCES;    
-    
-    
+    public TableDO VM_OFFENCES;
+
     //.............................................................
     // For internal use to store the individual references so that
     // common methods can be called in a loop
     //.............................................................
-    
     private Vector masterTableDOs;
 
-
     /**
-     * Once the master table DO are created, call this method
-     * to fill the masterTableDOs.
-     **/
+     * Once the master table DO are created, call this method to fill the
+     * masterTableDOs.
+     *
+     */
     public void fillMasterTableVector() {
         masterTableDOs = new Vector();
         //..........................................................
@@ -148,7 +146,7 @@ public class MasterTables extends ClientObject implements Serializable {
         masterTableDOs.add(VM_MODELS);
         masterTableDOs.add(VM_OWCATG);
         masterTableDOs.add(VM_OWCODE);
-        masterTableDOs.add(VM_PAYMENT_MODE);        
+        masterTableDOs.add(VM_PAYMENT_MODE);
         masterTableDOs.add(VM_PACTION);
         masterTableDOs.add(VM_PERMIT_AREA_CENTRE);
         masterTableDOs.add(VM_PINCODE_MASTER);
@@ -167,7 +165,7 @@ public class MasterTables extends ClientObject implements Serializable {
         masterTableDOs.add(VM_VEH_CATG);
         masterTableDOs.add(VM_VHCLASS_CD);
         masterTableDOs.add(VM_MODULE_MASTER);
-        masterTableDOs.add(VM_TRADE_CERT_FOR);        
+        masterTableDOs.add(VM_TRADE_CERT_FOR);
         masterTableDOs.add(VM_AUDIT_TYPE);
         masterTableDOs.add(VM_EUROTYPES);
         masterTableDOs.add(VM_DISTRICT);
@@ -180,13 +178,12 @@ public class MasterTables extends ClientObject implements Serializable {
         masterTableDOs.add(VM_VIA_MASTER);
         masterTableDOs.add(VM_USERS);
         //masterTableDOs.add(VM_CHOICE_FEE_MAST);
-        
+
         //kml 02-02-2009
         masterTableDOs.add(VM_KIT_MFG);
-        masterTableDOs.add(VM_KIT_TYPE);    
-        masterTableDOs.add(VM_KIT_WORKSHOP);  
-         
-        
+        masterTableDOs.add(VM_KIT_TYPE);
+        masterTableDOs.add(VM_KIT_WORKSHOP);
+
         //...........................................................
         // Master Tables for which only TableDO to be made.
         // These are the tables which does not contain the PK column.
@@ -195,10 +192,9 @@ public class MasterTables extends ClientObject implements Serializable {
         //...........................................................
         masterTableDOs.add(VM_ACTION);
         masterTableDOs.add(VM_OFFENCES);
-        
-        
+
     }
-    
+
     /**
      * Returns the master table list
      *

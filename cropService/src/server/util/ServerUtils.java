@@ -19,10 +19,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.config.ApplicationConfig;
 
-
 /**
  * This class is used to Server Utilities
- * 
+ *
  * @author tapas
  */
 public abstract class ServerUtils {
@@ -30,12 +29,19 @@ public abstract class ServerUtils {
      * VERSION HISTORY
      * 2.0 : 15 Aug 2003
      */
-    /** Server Name */
+
+    /**
+     * Server Name
+     */
     static Logger LOGGER = LogManager.getLogger(ServerUtils.class);
     public static final String SERVER_NAME = "UP CHECKPOST";
-    /** Server version */
+    /**
+     * Server version
+     */
     public static final String SERVER_VERSION = "1.0";
-    /** Server version date used for version identifier */
+    /**
+     * Server version date used for version identifier
+     */
     public static final String SERVER_VERSION_IDENTIFIER = "(15 FEB 2012)";
 
     /**
@@ -44,7 +50,7 @@ public abstract class ServerUtils {
     public static void pst(Throwable t) {
         if (ApplicationConfig.DEBUG_PRINT_STACK_TRACE) {
             //Debug.log(Debug.EXC +"------------pst : server-------------");
-            LOGGER.info(Debug.EXC +"------------pst : server-------------");
+            LOGGER.info(Debug.EXC + "------------pst : server-------------");
             t.printStackTrace();
             //LOGGER.info(t.printStackTrace());
         }
@@ -61,4 +67,3 @@ public abstract class ServerUtils {
         return new java.util.Date();
     }
 }
-

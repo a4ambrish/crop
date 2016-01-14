@@ -12,6 +12,7 @@ package common.db;
 //
 // Importing standard java packages/classes
 //
+
 import java.sql.*;
 import java.io.*;
 //
@@ -19,26 +20,31 @@ import java.io.*;
 //
 import common.*;
 
-
 /**
  * Converts a given table database into Java Object (Read-Only).
  *
  * @author RCN
  */
 public class TableDO extends ClientObject implements Serializable {
+
     ////////////////////////////////////////////////////////////////////////
     // INSTANCE VARIABLES
     ////////////////////////////////////////////////////////////////////////
-    /** DB table name */
+    /**
+     * DB table name
+     */
     protected String tableName;
 
-    /** MetaData to give column names and column types */
+    /**
+     * MetaData to give column names and column types
+     */
     protected String[][] metadata;
 
-    /** Data exactly as it is in the table */
+    /**
+     * Data exactly as it is in the table
+     */
     protected String[][] data;
 
-    
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR(S)
     ////////////////////////////////////////////////////////////////////////
@@ -55,7 +61,6 @@ public class TableDO extends ClientObject implements Serializable {
         this.data = data;
     }
 
-    
     ////////////////////////////////////////////////////////////////////////
     // METHOD(S)
     ////////////////////////////////////////////////////////////////////////
@@ -81,8 +86,8 @@ public class TableDO extends ClientObject implements Serializable {
      * </PRE>
      *
      * @return Metadata array. First row (String[0][i]) contain ColumnNames,
-     *          Second row (String[1][i]) contain ColumnTypeNames and
-     *          Third row (String[2][i] contain ColumnTypes
+     * Second row (String[1][i]) contain ColumnTypeNames and Third row
+     * (String[2][i] contain ColumnTypes
      *
      * @see <A HREF="java.sql.Types">java.sql.Types</A>
      */
@@ -110,35 +115,35 @@ public class TableDO extends ClientObject implements Serializable {
                 return data[i];
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Returns data for the given column index from the given data.
      *
      * @param colIdx Column index for which the data need to be returned.
      *
-     * @return the data 
+     * @return the data
      */
     protected static String[] getDataForColumn(int colIdx, String[][] tableData)
             throws ClientException {
-                
+
         // Check the index
-        if (colIdx > tableData.length-1 || colIdx < 0) {
+        if (colIdx > tableData.length - 1 || colIdx < 0) {
             throw new ClientException("Out of range Column Index : getDataForColumn()");
         }
-        
+
         // Get the data
         String[] coldata = new String[tableData.length];
         for (int i = 0; i < coldata.length; i++) {
             coldata[i] = tableData[i][colIdx];
         }
-        
+
         // Return the data
         return coldata;
     }
-    
+
     /**
      * Get the number of columns in the table
      *
@@ -148,31 +153,31 @@ public class TableDO extends ClientObject implements Serializable {
         if (metadata == null || metadata.length == 0) {
             return 0;
         }
-        
+
         return metadata[0].length;
     }
-    
+
     /**
      * Dump. Debug method to display the data.
      */
     public void dump() {
-        System.out.println("\n------------<<< " +tableName +" >>>------------");
-        for (int i = 0; i < metadata.length; i++) { 
-            for (int j = 0; j < metadata[0].length; j++) {            
+        System.out.println("\n------------<<< " + tableName + " >>>------------");
+        for (int i = 0; i < metadata.length; i++) {
+            for (int j = 0; j < metadata[0].length; j++) {
                 System.out.print(metadata[i][j]);
-                if (j != metadata[0].length-1) {
+                if (j != metadata[0].length - 1) {
                     System.out.print(" : ");
                 }
             }
-            System.out.println();            
+            System.out.println();
         }
-        
+
         System.out.println();
         for (int i = 0; data != null && i < data.length; i++) {
-            for (int j = 0; j < data[0].length; j++) {            
+            for (int j = 0; j < data[0].length; j++) {
                 System.out.print(data[i][j]);
-                if (j != data[0].length-1) {
-                    System.out.print(" : ");                
+                if (j != data[0].length - 1) {
+                    System.out.print(" : ");
                 }
             }
             System.out.println();

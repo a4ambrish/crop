@@ -13,8 +13,8 @@ package nic.java.util;
 //
 // Importing standard java packages/classes
 //
-import java.io.*;
 
+import java.io.*;
 
 /**
  * Handles uncaught exceptions.
@@ -22,15 +22,20 @@ import java.io.*;
  * @author RCN
  */
 public class UncaughtExceptionManager extends ThreadGroup {
+
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS
     ////////////////////////////////////////////////////////////////////////
-    /** Constructor */
+    /**
+     * Constructor
+     */
     public UncaughtExceptionManager(String name) {
         super(name);
     }
-    
-    /** Constructor */
+
+    /**
+     * Constructor
+     */
     public UncaughtExceptionManager(ThreadGroup parent, String name) {
         super(parent, name);
     }
@@ -39,8 +44,8 @@ public class UncaughtExceptionManager extends ThreadGroup {
     // METHODS
     ////////////////////////////////////////////////////////////////////////
     /**
-     * Override the uncaughtException to handle the uncaught
-     * exceptions in the code.
+     * Override the uncaughtException to handle the uncaught exceptions in the
+     * code.
      */
     public void uncaughtException(Thread t, Throwable e) {
         Debug.logexc(e);
@@ -49,8 +54,8 @@ public class UncaughtExceptionManager extends ThreadGroup {
             Debug.logexc(e, "Returning....");
             return;
         }
-        
+
         String strace = CommonUtils.getStackTrace(e);
-        Debug.logexc(e, CommonUtils.NEW_LINE +strace);
+        Debug.logexc(e, CommonUtils.NEW_LINE + strace);
     }
 }

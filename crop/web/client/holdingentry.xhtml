@@ -33,7 +33,7 @@
                                      required="true" requiredMessage="Please Select District" label="District">
                         <f:selectItems value="#{holdingDataBean.districtList}"/>
                         <p:ajax listener="#{holdingDataBean.updateTehsilList()}" update="lstTehsil lstVillage"/>
-                        
+
                     </p:selectOneMenu>
 
                     <p:outputLabel for="lstTehsil" value="Tehsil"/>
@@ -46,10 +46,10 @@
                     <p:selectOneMenu id="lstVillage" value="#{holdingDataBean.villageCd}" required="true" requiredMessage="Please Select Village" label="Village">
                         <f:selectItems value="#{holdingDataBean.villageList}"/>
                     </p:selectOneMenu>
-<!--                    <p:outputLabel for="lstCrop" value="Select Crop"/>
-                    <p:selectOneMenu id="lstCrop" value="#{holdingDataBean.cropCd}" required="true" requiredMessage="Please Select Crop" label="Crop">
-                        <f:selectItems value="#{holdingDataBean.cropList}"/>
-                    </p:selectOneMenu>-->
+                    <!--                    <p:outputLabel for="lstCrop" value="Select Crop"/>
+                                        <p:selectOneMenu id="lstCrop" value="#{holdingDataBean.cropCd}" required="true" requiredMessage="Please Select Crop" label="Crop">
+                                            <f:selectItems value="#{holdingDataBean.cropList}"/>
+                                        </p:selectOneMenu>-->
                 </p:panelGrid>
                 <p:spacer  width="10"/>
                 <p:panelGrid columns="8" id="pnlData">
@@ -58,32 +58,32 @@
                                  requiredMessage="Please enter Sr No" label="Sr No"
                                  >
                     </p:inputText>
-                    
+
                     <p:outputLabel for='txtAreaSown' value="Area Sown"/>
                     <p:inputText id='txtAreaSown' value="#{holdingDataBean.holdingData.areaSown}" required="true"
                                  requiredMessage="Please enter Area Sown" label="Area Sown"
                                  >
                     </p:inputText>
-                    
-                    
+
+
                     <p:outputLabel for='txtCurrentFallow' value="Current Fallow"/>
                     <p:inputText id='txtCurrentFallow' value="#{holdingDataBean.holdingData.currentFallow}" required="true"
                                  requiredMessage="Please enter Current Fallow" label="Current Fallow"
                                  >
                     </p:inputText>
-                    
+
                     <p:outputLabel for='txtAreaUncultivated' value="Area Uncultivated"/>
                     <p:inputText id='txtAreaUncultivated' value="#{holdingDataBean.holdingData.areaUncultivated}" required="true"
                                  requiredMessage="Please enter Area Uncultivated" label="Area Uncultivated"
                                  >
                     </p:inputText>
-                    
+
                     <p:outputLabel for='txtAreaIrrigated' value="Area Irrigated"/>
                     <p:inputText id='txtAreaIrrigated' value="#{holdingDataBean.holdingData.areaIrrigated}" required="true"
                                  requiredMessage="Please enter Sr No" label="Sr No"
                                  >
                     </p:inputText>
-                    
+
                 </p:panelGrid>
                 <p:panelGrid >
                     <p:spacer height="10" width="10" />

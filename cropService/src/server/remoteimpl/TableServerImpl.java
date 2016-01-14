@@ -26,7 +26,7 @@ import server.db.DBUtils;
  *
  * @author ambrish
  */
-public class TableServerImpl implements TableServer,Serializable {
+public class TableServerImpl implements TableServer, Serializable {
 
     @Override
     public MasterTables getStoredMasterTables() throws RemoteException {
@@ -55,7 +55,7 @@ public class TableServerImpl implements TableServer,Serializable {
 
     @Override
     public ArrayList<StateMasterDO> loadStateMasterList() throws ClientException {
-       ArrayList<StateMasterDO> list = new ArrayList<StateMasterDO>();
+        ArrayList<StateMasterDO> list = new ArrayList<StateMasterDO>();
         try {
             String sqlQuery = "SELECT state_ut, state_name  FROM state_mas";
             RowSet rs = DBUtils.fetchDetachedRowSet(sqlQuery);
@@ -92,7 +92,7 @@ public class TableServerImpl implements TableServer,Serializable {
 
     @Override
     public ArrayList<TehsilMasterDO> loadTehsilMasterList() throws ClientException {
-         ArrayList<TehsilMasterDO> list = new ArrayList<TehsilMasterDO>();
+        ArrayList<TehsilMasterDO> list = new ArrayList<TehsilMasterDO>();
         try {
             String sqlQuery = "SELECT stat_cd, dist_cd, tehs_cd, tehs_name  FROM tehs_mas";
             RowSet rs = DBUtils.fetchDetachedRowSet(sqlQuery);
@@ -112,7 +112,7 @@ public class TableServerImpl implements TableServer,Serializable {
 
     @Override
     public ArrayList<VillageMasterDO> loadVillageMasterList() throws ClientException {
-          ArrayList<VillageMasterDO> list = new ArrayList<VillageMasterDO>();
+        ArrayList<VillageMasterDO> list = new ArrayList<VillageMasterDO>();
         try {
             String sqlQuery = "SELECT state_ut, dist_cd, tehs_cd, vill_cd, vill_name  FROM vill_mas";
             RowSet rs = DBUtils.fetchDetachedRowSet(sqlQuery);
@@ -123,8 +123,7 @@ public class TableServerImpl implements TableServer,Serializable {
                 dobj.setTehsCd(rs.getString("tehs_cd"));
                 dobj.setVillageCd(rs.getString("vill_cd"));
                 dobj.setVillageName(rs.getString("vill_name"));
-                
-                
+
                 list.add(dobj);
             }
 

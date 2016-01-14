@@ -12,6 +12,7 @@ package common.printing;
 //
 // Importing standard java packages/classes
 //
+
 import java.util.*;
 import java.text.NumberFormat;
 import java.io.*;
@@ -20,35 +21,41 @@ import java.io.*;
 //
 // NONE
 
-
 /**
  * A value (String) to print at specified location
  *
  * @author CPO
  */
 public class ElementValue implements Serializable {
+
     ////////////////////////////////////////////////////////////////////////
     // VARIABLES
     ////////////////////////////////////////////////////////////////////////
-    /** X (pixel) location */
+    /**
+     * X (pixel) location
+     */
     private int x;
 
-    /** Y (pixel) location */
+    /**
+     * Y (pixel) location
+     */
     private int y;
 
-    /** Data to print */
+    /**
+     * Data to print
+     */
     private String value;
 
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS
     ////////////////////////////////////////////////////////////////////////
-    public ElementValue(int x, int y, String value) 
+    public ElementValue(int x, int y, String value)
             throws PrintDataException {
 
         // Check input
         if (value == null || x < 0 || y < 0) {
-            throw new PrintDataException("Incorrect value passed : x: " 
-                                               +x +" y: " +y +" value: " + value);
+            throw new PrintDataException("Incorrect value passed : x: "
+                    + x + " y: " + y + " value: " + value);
         }
 
         // Initialize
@@ -73,11 +80,11 @@ public class ElementValue implements Serializable {
      * Returns Y coordinate location
      *
      * @return y the Y coordinate location
-     */    
+     */
     public int getY() {
         return y;
     }
-    
+
     /**
      * Returns value of element
      *
@@ -94,6 +101,6 @@ public class ElementValue implements Serializable {
      * Debug Method
      */
     public String dump() {
-       return "x,y,value : " +x + "," +y + "," +value;
+        return "x,y,value : " + x + "," + y + "," + value;
     }
 }

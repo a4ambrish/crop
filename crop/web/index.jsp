@@ -13,9 +13,9 @@
 
 <!DOCTYPE html>
 <f:view>
-    
+
     <h:form>
-        
+
         <h:outputLabel value="this is plain jsf"/>
     </h:form>
 </f:view>

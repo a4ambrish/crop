@@ -15,6 +15,7 @@ package common.remote;
 //
 // Importing standard java packages/classes
 //
+
 import java.rmi.*;
 import java.util.*;
 import java.sql.*;
@@ -25,61 +26,56 @@ import java.sql.*;
 import common.*;
 import common.dobj.*;
 
-
 /**
  * Entry object for handling a form/service
  */
 public interface FormServer extends Remote {
-    /** 
+
+    /**
      * Process the given form data to make changes in the database.
      *
-     * @param data object containing:-
-     *          1. DO
-     *          2. Service ID (see: ServiceIds.java)
-     *          3. Operation ID (see: OperationIds.java)
+     * @param data object containing:- 1. DO 2. Service ID (see:
+     * ServiceIds.java) 3. Operation ID (see: OperationIds.java)
      *
-     * @return Return data represented as java.lang.Object. The process
-     *         method may return any kind of return data for example String,
-     *         String[], int (wrapped into java.lang.Integer), etc represented
-     *         as java.lang.Object. It is responsibility of the caller of this 
-     *         method to handle the retrurn data appropriately.
+     * @return Return data represented as java.lang.Object. The process method
+     * may return any kind of return data for example String, String[], int
+     * (wrapped into java.lang.Integer), etc represented as java.lang.Object. It
+     * is responsibility of the caller of this method to handle the retrurn data
+     * appropriately.
      */
     Object process(FormData data) throws RemoteException, ClientException;
-    
-    /** 
+
+    /**
      * Constructs a new DO object.
      *
-     * @param data object containing:-
-     *          1. String[] args - array of arguments.
-     *          2. Service ID (see: ServiceIds.java)
-     *          3. Operation ID (see: OperationIds.java)
+     * @param data object containing:- 1. String[] args - array of arguments. 2.
+     * Service ID (see: ServiceIds.java) 3. Operation ID (see:
+     * OperationIds.java)
      *
-     * @return Returns the DO object of the service as represented by the 
-     *         "serviceID" in the InputData argument. It is the responsibility 
-     *         of the caller of this method to appropriately cast the 
-     *         return DO before using it.
+     * @return Returns the DO object of the service as represented by the
+     * "serviceID" in the InputData argument. It is the responsibility of the
+     * caller of this method to appropriately cast the return DO before using
+     * it.
      */
     DO makeDO(InputData data) throws RemoteException, ClientException;
 
-    /** 
+    /**
      * Constructs a array of DO objects.
      *
-     * @param data object containing:-
-     *          1. String[] args - array of arguments.
-     *          2. Service ID (see: ServiceIds.java)
-     *          3. Operation ID (see: OperationIds.java)
+     * @param data object containing:- 1. String[] args - array of arguments. 2.
+     * Service ID (see: ServiceIds.java) 3. Operation ID (see:
+     * OperationIds.java)
      *
-     * @return Returns the DO[] array for the service as represented by the 
-     *         "serviceID" in the InputData argument. It is the responsibility 
-     *         of the caller of this method to appropriately cast the 
-     *         return DO before using it.
+     * @return Returns the DO[] array for the service as represented by the
+     * "serviceID" in the InputData argument. It is the responsibility of the
+     * caller of this method to appropriately cast the return DO before using
+     * it.
      */
     DO[] makeDOArray(InputData data) throws RemoteException, ClientException;
-    
-    /** Function for returning the Registration Number...
-     * KML 14-10-2008 
+
+    /**
+     * Function for returning the Registration Number... KML 14-10-2008
      */
-    
     String ReturnRegnNo(InputData data) throws RemoteException, ClientException;
-    
+
 }

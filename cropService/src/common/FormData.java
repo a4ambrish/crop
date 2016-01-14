@@ -12,6 +12,7 @@ package common;
 //
 // Importing standard java packages/classes
 //
+
 import java.io.*;
 import java.util.*;
 //
@@ -21,97 +22,93 @@ import common.*;
 import common.context.*;
 import common.dobj.*;
 
-
 /**
  * Form Data
  *
  * @author RCN
  */
 public class FormData extends ClientObject implements Serializable {
+
     /**
      * ClientContext object has all data related to a user and his session
-     */    
+     */
     private ClientContext clientContext;
 
     /**
      * List of DataObjects that represents the data on the form (panels/tabs).
-     * In most of the cases this array contains single DO that represents
-     * the entire data on a given Form.
-     */    
+     * In most of the cases this array contains single DO that represents the
+     * entire data on a given Form.
+     */
     private DO[] dataObjects;
 
     /**
      * Service identifier
-     */    
-    private int serviceID;    
-    
+     */
+    private int serviceID;
+
     /**
      * Operation identifier
-     */    
-    private int operationID;    
-    
+     */
+    private int operationID;
 
     /////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS
     /////////////////////////////////////////////////////////////////////
-    /** 
+    /**
      * Constructor.
      */
     public FormData() {
     }
-    
-    /** 
+
+    /**
      * Constructor initializing the Formdata object.
      *
-     * @param clientContext ClientContext object has all data related to
-     *                      a user and his session
+     * @param clientContext ClientContext object has all data related to a user
+     * and his session
      * @param dataObject DataObject has the data on the form
      * @param serviceID Service identifier
      * @param operationID Operation identifier
      */
-    public FormData(ClientContext clientContext, DO dataObject, 
-                    int serviceID, int operationID) {
-        init(clientContext, new DO[] {dataObject}, serviceID, operationID);
+    public FormData(ClientContext clientContext, DO dataObject,
+            int serviceID, int operationID) {
+        init(clientContext, new DO[]{dataObject}, serviceID, operationID);
     }
 
-    /** 
+    /**
      * Constructor initializing the Formdata object.
      *
-     * @param clientContext ClientContext object has all data related to
-     *                      a user and his session
+     * @param clientContext ClientContext object has all data related to a user
+     * and his session
      * @param dataObjects List of DataObjects that represents the data on the
-     *                    form (panels/tabs). In most of the cases this array
-     *                    contains single DO that represents the entire data
-     *                    on a given Form.
+     * form (panels/tabs). In most of the cases this array contains single DO
+     * that represents the entire data on a given Form.
      * @param serviceID Service identifier
      * @param operationID Operation identifier
      */
-    public FormData(ClientContext clientContext, DO[] dataObjects, 
-                    int serviceID, int operationID) {
+    public FormData(ClientContext clientContext, DO[] dataObjects,
+            int serviceID, int operationID) {
         init(clientContext, dataObjects, serviceID, operationID);
     }
-    
-    /** 
+
+    /**
      * Method to initialize values of FormData.
      *
-     * @param clientContext ClientContext object has all data related to
-     *                      a user and his session
+     * @param clientContext ClientContext object has all data related to a user
+     * and his session
      * @param dataObjects List of DataObjects that represents the data on the
-     *                    form (panels/tabs). In most of the cases this array
-     *                    contains single DO that represents the entire data
-     *                    on a given Form.
+     * form (panels/tabs). In most of the cases this array contains single DO
+     * that represents the entire data on a given Form.
      * @param serviceID Service identifier
      * @param operationID Operation identifier
      */
-    public void init(ClientContext clientContext, DO[] dataObjects, 
-                     int serviceID, int operationID) {
+    public void init(ClientContext clientContext, DO[] dataObjects,
+            int serviceID, int operationID) {
         this.clientContext = clientContext;
         this.dataObjects = dataObjects;
         this.serviceID = serviceID;
         this.operationID = operationID;
     }
-    
-    
+
     ////////////////////////////////////////////////////////////////////
     // GETTER Methods
     ////////////////////////////////////////////////////////////////////
@@ -132,7 +129,7 @@ public class FormData extends ClientObject implements Serializable {
     public DO getDataObject() {
         return dataObjects[0];
     }
-    
+
     /**
      * Get the data objects array.
      *
@@ -141,7 +138,7 @@ public class FormData extends ClientObject implements Serializable {
     public DO[] getDataObjects() {
         return dataObjects;
     }
-    
+
     /**
      * Get the operation ID.
      *
@@ -159,7 +156,7 @@ public class FormData extends ClientObject implements Serializable {
     public int getServiceID() {
         return serviceID;
     }
-    
+
     ////////////////////////////////////////////////////////////////////
     // SETTER Methods
     ////////////////////////////////////////////////////////////////////
@@ -180,7 +177,7 @@ public class FormData extends ClientObject implements Serializable {
     public void setDataObject(DO dataObject) {
         this.dataObjects[0] = dataObject;
     }
-    
+
     /**
      * Set the Data Objects array.
      *
@@ -189,7 +186,7 @@ public class FormData extends ClientObject implements Serializable {
     public void setDataObjects(DO[] dataObjects) {
         this.dataObjects = dataObjects;
     }
-    
+
     /**
      * Set the operation ID.
      *
@@ -198,7 +195,7 @@ public class FormData extends ClientObject implements Serializable {
     public void setOperationID(int operationID) {
         this.operationID = operationID;
     }
-    
+
     /**
      * Set the service ID.
      *

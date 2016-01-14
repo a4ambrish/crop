@@ -11,8 +11,8 @@ import common.dobj.DO;
  *
  * @author ambrish
  */
-public class TehsilMasterDO extends DO{
-    
+public class TehsilMasterDO extends DO {
+
     private String stateUT;
     private String distCd;
     private String tehsCd;
@@ -83,7 +83,5 @@ public class TehsilMasterDO extends DO{
     public String dump() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
 }

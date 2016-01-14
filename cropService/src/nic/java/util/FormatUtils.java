@@ -21,10 +21,10 @@ package nic.java.util;
 //
 // Importing standard java packages/classes
 //
+
 import java.util.*;
 import java.text.*;
 import java.text.NumberFormat;
-
 
 /**
  * Provides number of utility static methods and constants for Formatting.
@@ -32,30 +32,30 @@ import java.text.NumberFormat;
  * @author RCN
  */
 abstract public class FormatUtils {
+
     /**
      * Database name of the database used by the server. This variable is
-     * initialized by server on SERVER side copy of this common class
-     * and by client on CLIENT side copy of this common class. CARE must 
-     * be taken to initialize it properly on both sides. IDEALLY THIS VARIABLE
-     * SHOULD BE INITIALIZED ONLY ONCE AT THE START TIME ON SERVER SIDE AND THEN
-     * ON CLIENT SIDE. The client knows the database name by calling a remote
-     * method.
+     * initialized by server on SERVER side copy of this common class and by
+     * client on CLIENT side copy of this common class. CARE must be taken to
+     * initialize it properly on both sides. IDEALLY THIS VARIABLE SHOULD BE
+     * INITIALIZED ONLY ONCE AT THE START TIME ON SERVER SIDE AND THEN ON CLIENT
+     * SIDE. The client knows the database name by calling a remote method.
      *
      * Why we have done this : This is done to make widely used methods like
-     * ff(), fd() to be used easily. Caller of these methods worry nothing 
-     * about the database used and call to these methods becomes database 
-     * independent for him. However these methods internally uses this 
-     * variable to figure out as how to do the data formating based on the
-     * database sytax.
+     * ff(), fd() to be used easily. Caller of these methods worry nothing about
+     * the database used and call to these methods becomes database independent
+     * for him. However these methods internally uses this variable to figure
+     * out as how to do the data formating based on the database sytax.
      */
     public static String DB_SYSTEM = null;
-   
+
     /**
      * Return an null string as empty string.
      *
      * @param str Given string object that could be null
      *
-     * @return Returns "" if the given string object is null else the string as it is returned.
+     * @return Returns "" if the given string object is null else the string as
+     * it is returned.
      */
     public static String formatNullString(String str) {
         return str == null ? "" : str;
@@ -67,7 +67,7 @@ abstract public class FormatUtils {
      * @param n eg 5
      * @param x eg 1
      *
-     * @return eg "00001"     
+     * @return eg "00001"
      */
     public static String getInNDigitFormat(int n, int x) {
         NumberFormat nf = NumberFormat.getNumberInstance();
@@ -75,11 +75,11 @@ abstract public class FormatUtils {
         nf.setMaximumIntegerDigits(n);
         nf.setGroupingUsed(false); // Do not use grouping coma (eg 83,219,222.93)
         return nf.format(x);
-    }    
+    }
 
     /**
-     * Get the given number as comma grouped. For example 1048576
-     * will be returned as 1,048,576
+     * Get the given number as comma grouped. For example 1048576 will be
+     * returned as 1,048,576
      *
      * @param x Given integral number
      *
@@ -90,7 +90,7 @@ abstract public class FormatUtils {
         nf.setGroupingUsed(true);
         return nf.format(x);
     }
-    
+
     /**
      * Right align a given number for the specified places
      *
@@ -98,174 +98,163 @@ abstract public class FormatUtils {
      * @param places Number of places of alignment
      */
     public static String getRightAligned(int value, int places) {
-        String num = "" +value;
+        String num = "" + value;
         int ndigit = num.length();
         if (places < 0 || places <= ndigit) {
             return num;
         }
-        
+
         StringBuffer sbuf = new StringBuffer();
-        for (int i = 0; i < places-ndigit; i++) {
+        for (int i = 0; i < places - ndigit; i++) {
             sbuf.append(" ");
         }
         sbuf.append(num);
-        
+
         return sbuf.toString();
     }
 
     /**
-     * Formats a given String value in a sql format of type
-     * ('value', ) or (null, ). This escapes the APOSTROPE (')
-     * char for Oracle so that string can be entered via SQL
-     * statement
+     * Formats a given String value in a sql format of type ('value', ) or
+     * (null, ). This escapes the APOSTROPE (') char for Oracle so that string
+     * can be entered via SQL statement
      *
      * @param field Given column field value
      *
-     * @return ('value', ) or (null, )  after char ' properly escaped for SQL
+     * @return ('value', ) or (null, ) after char ' properly escaped for SQL
      */
     public static String formatText(String field) {
         // Format
         if (field == null || (field.trim()).equals("")) {
             return "NULL, ";
-        }
-        else {
+        } else {
             // Escape single quotes if any
             String escfield = escapeSingleQuote(field);
             return "'" + escfield + "', ";
         }
     }
-    
+
     /**
      * Wrapper method for the formatText() method.
      *
      * @param str Given string object that could be null
      *
-     * @return Returns "NULL" if the given string object is null or "", else 
-     * "'" + str + "', " is returned.
+     * @return Returns "NULL" if the given string object is null or "", else "'"
+     * + str + "', " is returned.
      */
     public static String fs(String str) {
         return formatText(str);
     }
 
     //kml 15.10.2008 start
-    
     /**
-     * Wrapper method for the formatText() method.
-     *created for smart card only
+     * Wrapper method for the formatText() method. created for smart card only
      *
      * @param str Given string object that could be null
      *
-     * @return Returns "NULL" if the given string object is null or "", else 
-     * "'" + str + "', " is returned.
+     * @return Returns "NULL" if the given string object is null or "", else "'"
+     * + str + "', " is returned.
      */
     public static String fs_smart(String str) {
         return formatText_smart(str);
     }
-    
-     /**
-     * Formats a given String value in a sql format of type
-     * ('value', ) or (null, ). This escapes the APOSTROPE (')
-     * char for Oracle so that string can be entered via SQL
-     * statement
+
+    /**
+     * Formats a given String value in a sql format of type ('value', ) or
+     * (null, ). This escapes the APOSTROPE (') char for Oracle so that string
+     * can be entered via SQL statement
      *
      * created for smart card only
+     *
      * @param field Given column field value
      *
-     * @return ('value', ) or (null, )  after char ' properly escaped for SQL
+     * @return ('value', ) or (null, ) after char ' properly escaped for SQL
      */
     public static String formatText_smart(String field) {
         // Format
-        if (field == null ) {
+        if (field == null) {
             return "NULL, ";
-        }
-        else {
+        } else {
             // Escape single quotes if any
             String escfield = escapeSingleQuote(field);
             return "'" + escfield + "', ";
         }
     }
-    
+
     //kml 15.10.2008 end
-    
     /**
      * Method to format a date string as per database requirements without comma
      * at the end.
      *
      * @param str Given string object that could be null.
      *
-     * @return Returns "NULL" if the given string object is null or ""
-     * else date in DB format as system settings.
+     * @return Returns "NULL" if the given string object is null or "" else date
+     * in DB format as system settings.
      */
     public static String fdwc(String str) throws FormatUtilsException {
         String formattedDate = fd(str);
         int lastIndexOfComma = formattedDate.lastIndexOf(",");
         formattedDate = formattedDate.substring(0, lastIndexOfComma);
-        
+
         // Return
         return formattedDate;
     }
-    
+
     /**
      * Method to format a date string as per database requirements.
      *
      * @param str Given string object that could be null.
      *
-     * @return Returns "NULL, " if the given string object is null or ""
-     * else date in DB format as system settings.
+     * @return Returns "NULL, " if the given string object is null or "" else
+     * date in DB format as system settings.
      */
     public static String fd(String str) throws FormatUtilsException {
         String formattedDate = null;
         if (str != null && str.trim().length() > 0) {
             Date dt = toDate(str);
-            
+
             if (dt == null) {
                 throw new FormatUtilsException("BUG : Control should never come here :"
-                                               +" Null parsed date : " +str);
+                        + " Null parsed date : " + str);
             }
-            
+
             if (DB_SYSTEM == null) {
                 throw new FormatUtilsException("BUG : Null database found");
-            }
-            else if (DB_SYSTEM.equalsIgnoreCase(CommonUtils.DB_SYSTEM_DB2)) {
-                formattedDate = "DATE('" +formatDateString(dt, "dd.MM.yyyy") +"'), ";
-            } 
-            else if (DB_SYSTEM.equalsIgnoreCase(CommonUtils.DB_SYSTEM_ORACLE)) {
-                formattedDate = "TO_DATE('" +formatDateString(dt, "dd-MMM-yyyy") +"', 'DD-MON-YYYY'), ";
-            } 
-            else if (DB_SYSTEM.equalsIgnoreCase(CommonUtils.DB_SYSTEM_MSSQL)) {
-                formattedDate = "'" +formatDateString(dt, "dd-MMM-yyyy") +"', ";
-            }
-            else {
+            } else if (DB_SYSTEM.equalsIgnoreCase(CommonUtils.DB_SYSTEM_DB2)) {
+                formattedDate = "DATE('" + formatDateString(dt, "dd.MM.yyyy") + "'), ";
+            } else if (DB_SYSTEM.equalsIgnoreCase(CommonUtils.DB_SYSTEM_ORACLE)) {
+                formattedDate = "TO_DATE('" + formatDateString(dt, "dd-MMM-yyyy") + "', 'DD-MON-YYYY'), ";
+            } else if (DB_SYSTEM.equalsIgnoreCase(CommonUtils.DB_SYSTEM_MSSQL)) {
+                formattedDate = "'" + formatDateString(dt, "dd-MMM-yyyy") + "', ";
+            } else {
                 throw new FormatUtilsException("BUG : Control should never come here :"
-                                               +" Unkown Db found : " +DB_SYSTEM);
+                        + " Unkown Db found : " + DB_SYSTEM);
             }
-        }
-        else {
+        } else {
             formattedDate = "NULL, ";
         }
-        
+
         return formattedDate;
     }
-    
-   /**
-    * Convert a date to required String format.
-    *
-    * @param date Given date.
-    * @param format Given String ("dd-MM-yyyy" for 01-01-2000 format
-    *                            "dd-MMM-YYYY" for 01-Jan-2000 format)
-    *
-    * @return Date in required format.
-    */
-    public static String formatDateString(java.util.Date date, String format){
+
+    /**
+     * Convert a date to required String format.
+     *
+     * @param date Given date.
+     * @param format Given String ("dd-MM-yyyy" for 01-01-2000 format
+     * "dd-MMM-YYYY" for 01-Jan-2000 format)
+     *
+     * @return Date in required format.
+     */
+    public static String formatDateString(java.util.Date date, String format) {
         if ((date == null) || (format == null)) {
             return null;
         }
-        
+
         // Set the date
         SimpleDateFormat fm = new SimpleDateFormat(format);
         return fm.format(date);
-     } 
-    
+    }
+
     /**
      * Convert a string to date.
      *
@@ -273,19 +262,18 @@ abstract public class FormatUtils {
      *
      * @return Date object
      */
-    public static Date toDate(String s){        
+    public static Date toDate(String s) {
         SimpleDateFormat df = new SimpleDateFormat(DateUtils.DATE_FORMAT);
         try {
             return df.parse(s);
-        }
-        catch(ParseException e) {
-            return null; 
+        } catch (ParseException e) {
+            return null;
         }
     }
 
     /**
-     * Formats a given String value in a sql format of type
-     * ('value' ) or (null ).
+     * Formats a given String value in a sql format of type ('value' ) or (null
+     * ).
      *
      * @param field Given column field
      *
@@ -295,17 +283,16 @@ abstract public class FormatUtils {
         // Format
         if (field == null || (field.trim()).equals("")) {
             return "null ";
-        }
-        else {
+        } else {
             // Escape single quotes if any
             String escfield = escapeSingleQuote(field);
-            return "'" +escfield +"' ";
+            return "'" + escfield + "' ";
         }
     }
 
     /**
-     * Formats a given String value in a sql format of type
-     * ('value' ) or (null ).
+     * Formats a given String value in a sql format of type ('value' ) or (null
+     * ).
      *
      * @param field Given column field
      *
@@ -314,10 +301,10 @@ abstract public class FormatUtils {
     public static String fswc(String field) {
         return formatTextWithoutComma(field);
     }
-    
+
     /**
-     * Formats a given String value representing date
-     * in a sql format of type ('to_date(...)' ) or (null ).
+     * Formats a given String value representing date in a sql format of type
+     * ('to_date(...)' ) or (null ).
      *
      * @param date_field Given column date field
      * @param date_format Required format (eg DD/MM/YYYY)
@@ -326,19 +313,17 @@ abstract public class FormatUtils {
      */
     public static String formatDate(String date_field, String date_format)
             throws FormatUtilsException {
-            
+
         if (date_field == null || (date_field.trim()).equals("")) {
             return "null, ";
-        }
-        else {            
-            return "to_date('" +date_field +"', '" +date_format +"'), ";
+        } else {
+            return "to_date('" + date_field + "', '" + date_format + "'), ";
         }
     }
 
     /**
-     * Formats a given String value representing date
-     * in a sql format of type ('to_date(...)' ) or (null )
-     * without the comma at the end.
+     * Formats a given String value representing date in a sql format of type
+     * ('to_date(...)' ) or (null ) without the comma at the end.
      *
      * @param date_field Given column date field
      * @param date_format Required format (eg DD/MM/YYYY)
@@ -346,27 +331,26 @@ abstract public class FormatUtils {
      * @return ('to_date(...)' ) or (null )
      */
     public static String formatDateWithoutComma(String date_field,
-                                                String date_format)
+            String date_format)
             throws FormatUtilsException {
-            
+
         if (date_field == null || (date_field.trim()).equals("")) {
             return "null ";
-        }
-        else {
-            return "to_date('" +date_field +"', '" +date_format +"') ";
+        } else {
+            return "to_date('" + date_field + "', '" + date_format + "') ";
         }
     }
-    
+
     /**
-     * Formats a given userid String based on whether it is "None"
-     * or some other valid user name.
+     * Formats a given userid String based on whether it is "None" or some other
+     * valid user name.
      *
      * @param userid User ID
      *
      * @return ('userid', ) or (null, )
      */
     public static String formatUser(String userid) {
-        String s_USERID = "'" +userid +"', ";
+        String s_USERID = "'" + userid + "', ";
 
         // Check special case of USERID for "None"
         if (userid == null) {
@@ -377,15 +361,15 @@ abstract public class FormatUtils {
     }
 
     /**
-     * Formats a given userid String based on whether it is "None"
-     * or some other valid user name Without Comma.
+     * Formats a given userid String based on whether it is "None" or some other
+     * valid user name Without Comma.
      *
      * @param userid User ID
      *
      * @return ('userid' ) or (null )
      */
     public static String formatUserWithoutComma(String userid) {
-        String s_USERID = "'" +userid +"' ";
+        String s_USERID = "'" + userid + "' ";
 
         // Check special case of USERID for "None"
         if (userid == null) {
@@ -396,16 +380,15 @@ abstract public class FormatUtils {
     }
 
     /**
-     * Format the HTML tags, Spaces, New Line etc in a given string
-     * so that the string content can be shown properly in the
-     * browser. If the input string obj is null, then returns
-     * empty string.
+     * Format the HTML tags, Spaces, New Line etc in a given string so that the
+     * string content can be shown properly in the browser. If the input string
+     * obj is null, then returns empty string.
      *
      * @param str Given string.
      *
-     * @return Formatted string (eg "Hello <B>Ram</B>" ->
-     *                             "Hello &lt;B&gt;There&lt;/B&gt;".
-     *         If the input string obj is null, then returns empty string.
+     * @return Formatted string (eg "Hello <B>Ram</B>" -> "Hello
+     * &lt;B&gt;There&lt;/B&gt;". If the input string obj is null, then returns
+     * empty string.
      */
     public static String formatHtmlTags(String str) {
         // If the input string obj is null, then returns
@@ -429,27 +412,22 @@ abstract public class FormatUtils {
                 //      If the first char is a SPACE replace that
                 //      with "&nbsp;" as <TT>...</TT> ignore all
                 //      initial SPACES
-                if ((i < len-1 && str.charAt(i+1) == ' ') || i == 0) {
+                if ((i < len - 1 && str.charAt(i + 1) == ' ') || i == 0) {
                     sb.append("&nbsp;");
-                }
-                else {
+                } else {
                     sb.append(ch);
                 }
                 largeWordLength = 0;
-            }
-            else if (ch == '\n') {  // Note : On Win32 NEW_LINE is '\r\n'
+            } else if (ch == '\n') {  // Note : On Win32 NEW_LINE is '\r\n'
                 sb.append("<BR>");
                 largeWordLength = 0;
-            }
-            else if (ch == '<') {
+            } else if (ch == '<') {
                 sb.append("&lt;");
                 largeWordLength++;
-            }
-            else if (ch == '>') {
+            } else if (ch == '>') {
                 sb.append("&gt;");
                 largeWordLength++;
-            }
-            else {
+            } else {
                 sb.append(ch);
                 largeWordLength++;
             }
@@ -463,18 +441,17 @@ abstract public class FormatUtils {
         }
         return sb.toString();
     }
-    
+
     /**
-     * Format the HTML tags, Spaces, New Line etc in a given string
-     * so that the string content can be shown properly in the
-     * browser. If the input string obj is null, then returns
-     * empty string.
+     * Format the HTML tags, Spaces, New Line etc in a given string so that the
+     * string content can be shown properly in the browser. If the input string
+     * obj is null, then returns empty string.
      *
      * @param str Given string.
      *
-     * @return Formatted string (eg "Hello <B>Ram</B>" ->
-     *                             "Hello &lt;B&gt;There&lt;/B&gt;".
-     *         If the input string obj is null, then returns empty string.
+     * @return Formatted string (eg "Hello <B>Ram</B>" -> "Hello
+     * &lt;B&gt;There&lt;/B&gt;". If the input string obj is null, then returns
+     * empty string.
      */
     public static String formatHtmlTagsForXML(String str) {
         // If the input string obj is null, then returns
@@ -498,35 +475,28 @@ abstract public class FormatUtils {
                 //      If the first char is a SPACE replace that
                 //      with "&nbsp;" as <TT>...</TT> ignore all
                 //      initial SPACES
-                if ((i < len-1 && str.charAt(i+1) == ' ') || i == 0) {
+                if ((i < len - 1 && str.charAt(i + 1) == ' ') || i == 0) {
                     sb.append("&amp;nbsp;");
-                }
-                else {
+                } else {
                     sb.append(ch);
                 }
                 largeWordLength = 0;
-            }
-            else if (ch == '<') {
+            } else if (ch == '<') {
                 sb.append("&lt;");
                 largeWordLength++;
-            }
-            else if (ch == '>') {
+            } else if (ch == '>') {
                 sb.append("&gt;");
                 largeWordLength++;
-            }
-            else if (ch == '&') {
+            } else if (ch == '&') {
                 sb.append("&amp;");
                 largeWordLength = 0;
-            }
-            else if (ch == '"') { 
+            } else if (ch == '"') {
                 sb.append("&quot;");
                 largeWordLength = 0;
-            }
-            else if (ch == '\'') {
+            } else if (ch == '\'') {
                 sb.append("&apos;");
                 largeWordLength = 0;
-            }                                    
-            else {
+            } else {
                 sb.append(ch);
                 largeWordLength++;
             }
@@ -540,11 +510,10 @@ abstract public class FormatUtils {
         }
         return sb.toString();
     }
-    
+
     /**
-     * Replaces every ' with '' in the given string. This is done
-     * so that the SQL for Oracle text data can be entered that
-     * contains Single Quote.
+     * Replaces every ' with '' in the given string. This is done so that the
+     * SQL for Oracle text data can be entered that contains Single Quote.
      *
      * @param str Given string
      *
@@ -554,42 +523,37 @@ abstract public class FormatUtils {
         return replaceWith(str, "'", "''");
     }
 
-    
-    
-     //venkat
-    
-    
+    //venkat
     /**
-     * Deleting ''(single quotes) in the given string. This is done
-     * so that the SQL for Oracle text data can be entered that
-     * contains no Single Quote.
+     * Deleting ''(single quotes) in the given string. This is done so that the
+     * SQL for Oracle text data can be entered that contains no Single Quote.
      *
      * @param str Given string
      *
      * @return Modified string
      */
-     public static String deleteSingleQuote(String str) {
+    public static String deleteSingleQuote(String str) {
         return replaceWith(str, "'", "");
     }
     //venkat
-    
-    
+
     /**
      * Replace the given string part with given replace string.
      *
      * @param str Given string (eg "c:\rcn\a.txt;d:\db\mail.elm")
      * @param replace Separator (eg ";")
-     * @param with Given string (eg "<BR>") with which to replace the 'replace' string.
+     * @param with Given string (eg "<BR>") with which to replace the 'replace'
+     * string.
      *
      * @return eg "c:\rcn\a.txt<BR>d:\db\mail.elm"
      */
     public static String replaceWith(String str,
-                                     String replace,
-                                     String with) {
+            String replace,
+            String with) {
         // Return str if any string given is null OR the
         // replace string is empty one
-        if (str == null || replace == null || with == null ||
-            replace.equals("")) {
+        if (str == null || replace == null || with == null
+                || replace.equals("")) {
             return str;
         }
 
@@ -606,8 +570,7 @@ abstract public class FormatUtils {
                 sb.append(str.substring(fromIndex, toIndex));
                 sb.append(with);
                 fromIndex = toIndex + len;
-            }
-            else {
+            } else {
                 // Get the remainder of the string, if any
                 if (fromIndex <= str.length()) {
                     sb.append(str.substring(fromIndex, str.length()));
@@ -617,7 +580,7 @@ abstract public class FormatUtils {
         }
         return sb.toString();
     }
-    
+
     /**
      * Simply removes the <...> tags. Period.
      *
@@ -639,17 +602,15 @@ abstract public class FormatUtils {
             // (both inclusive). Write the text found otherwise
             // to the buffer
             if (ch != '<') {
-               sb.append(ch);
-            }
-            else {
-               idx = html.indexOf('>', i+1);
-               if (idx != -1) {
-                   i = idx;
-               }
-               else {
-                   sb.append(html.substring(i, len));
-                   i = len;
-               }
+                sb.append(ch);
+            } else {
+                idx = html.indexOf('>', i + 1);
+                if (idx != -1) {
+                    i = idx;
+                } else {
+                    sb.append(html.substring(i, len));
+                    i = len;
+                }
             }
         }
 
@@ -657,5 +618,3 @@ abstract public class FormatUtils {
         return sb.toString();
     }
 }
-
-

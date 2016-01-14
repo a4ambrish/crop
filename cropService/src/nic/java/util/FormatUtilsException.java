@@ -16,13 +16,13 @@ package nic.java.util;
 //
 // NONE 
 
-
 /**
  * Exception for Format utility methods.
  *
  * @author RCN
  */
 public class FormatUtilsException extends UtilsException {
+
     /**
      * Constructor
      */
@@ -36,13 +36,13 @@ public class FormatUtilsException extends UtilsException {
      */
     public FormatUtilsException(String msg) {
         super(msg);
-        InstanceCount.add(this);        
+        InstanceCount.add(this);
     }
-    
-    /** 
-     * Override finalize() 
+
+    /**
+     * Override finalize()
      */
     public void finalize() {
         InstanceCount.remove(this);
-    }    
+    }
 }

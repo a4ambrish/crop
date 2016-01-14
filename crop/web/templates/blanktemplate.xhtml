@@ -1,59 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-<f:view contentType="text/html" id="fview">
+    <f:view contentType="text/html" id="fview">
 
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Crop Data Entry Application</title>
-	<ui:debug />
-	<f:metadata>
-		<ui:insert name="metadata" />
-	</f:metadata>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Crop Data Entry Application</title>
+        <ui:debug />
+        <f:metadata>
+            <ui:insert name="metadata" />
+        </f:metadata>
 
-	<h:head>
-		<style type="text/css">
-.ui-widget, .ui-widget .ui-widget {
-	font-size: 11px !important;
-}
-</style>
-	</h:head>
+        <h:head>
+            <style type="text/css">
+                .ui-widget, .ui-widget .ui-widget {
+                    font-size: 11px !important;
+                }
+            </style>
+        </h:head>
 
-	<p:layout fullPage="true" resizeTitle="resize"
-		style="background-color:#FFFFFF;">
-		
+        <p:layout fullPage="true" resizeTitle="resize"
+                  style="background-color:#FFFFFF;">
 
-		
 
-		<p:layoutUnit styleClass="layoutUnitCenter" position="center">
-			
-		You must follow any policies made available to you within the Services.
 
-Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.
 
-Using our Services does not give you ownership of any intellectual property rights in our Services or the content you access. You may not use content from our Services unless you obtain permission from its owner or are otherwise permitted by law. These terms do not grant you the right to use any branding or logos used in our Services. Don’t remove, obscure, or alter any legal notices displayed in or along with our Services.
+            <p:layoutUnit styleClass="layoutUnitCenter" position="center">
 
-Our Services display some content that is not Google’s. This content is the sole responsibility of the entity that makes it available. We may review content to determine whether it is illegal or violates our policies, and we may remove or refuse to display content that we reasonably believe violates our policies or the law. But that does not necessarily mean that we review content, so please don’t assume that we do.
+                You must follow any policies made available to you within the Services.
 
-In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. You may opt out of some of those communications.
+                Don’t misuse our Services. For example, don’t interfere with our Services or try to access them using a method other than the interface and the instructions that we provide. You may use our Services only as permitted by law, including applicable export and re-export control laws and regulations. We may suspend or stop providing our Services to you if you do not comply with our terms or policies or if we are investigating suspected misconduct.
 
-Some of our Services are available on mobile devices. Do not use such Services in a way that distracts you and prevents you from obeying traffic or safety laws.
-	
-		</p:layoutUnit>
-		<p:layoutUnit position="south" resizable="true" id="south">
-		<h:form >
-			<p:row>
-			<p:spacer width="300" height="15"></p:spacer>
-			<p:commandButton value="Accept" action="#{menuController.newCase}"
-				ajax="false" style="align: center;"></p:commandButton>
-				
-			</p:row>
-			</h:form>
-		</p:layoutUnit>
-	</p:layout>
-</f:view>
+                Using our Services does not give you ownership of any intellectual property rights in our Services or the content you access. You may not use content from our Services unless you obtain permission from its owner or are otherwise permitted by law. These terms do not grant you the right to use any branding or logos used in our Services. Don’t remove, obscure, or alter any legal notices displayed in or along with our Services.
+
+                Our Services display some content that is not Google’s. This content is the sole responsibility of the entity that makes it available. We may review content to determine whether it is illegal or violates our policies, and we may remove or refuse to display content that we reasonably believe violates our policies or the law. But that does not necessarily mean that we review content, so please don’t assume that we do.
+
+                In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. You may opt out of some of those communications.
+
+                Some of our Services are available on mobile devices. Do not use such Services in a way that distracts you and prevents you from obeying traffic or safety laws.
+
+            </p:layoutUnit>
+            <p:layoutUnit position="south" resizable="true" id="south">
+                <h:form >
+                    <p:row>
+                        <p:spacer width="300" height="15"></p:spacer>
+                        <p:commandButton value="Accept" action="#{menuController.newCase}"
+                                         ajax="false" style="align: center;"></p:commandButton>
+
+                    </p:row>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </f:view>
 </html>

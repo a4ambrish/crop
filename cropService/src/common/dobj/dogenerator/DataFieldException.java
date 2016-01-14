@@ -15,13 +15,13 @@ package common.dobj.dogenerator;
 //
 // NONE 
 
-
 /**
  * DataField expception class
  *
  * @author RCN
  */
 public class DataFieldException extends Exception {
+
     /**
      * Constructor
      */

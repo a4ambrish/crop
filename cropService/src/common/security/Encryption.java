@@ -16,32 +16,31 @@ package common.security;
 //
 // Importing standard java packages/classes
 //
+
 import java.security.*;
 
-
 /**
- * Encryption of given string using MD5 algorithm + our
- * own padding
+ * Encryption of given string using MD5 algorithm + our own padding
  *
  * @author RCN
  */
 final public class Encryption {
+
     /**
-     * MD5 based encryption. The logic must not be changed in the
-     * method once the strings (eg password) are stored using it.
+     * MD5 based encryption. The logic must not be changed in the method once
+     * the strings (eg password) are stored using it.
      *
      * @param str Given String to be encrypted
      *
-     * @return The ecrypted fixed length MD5 based string or null
-     *         if something went wrong.
+     * @return The ecrypted fixed length MD5 based string or null if something
+     * went wrong.
      */
     public static final String md5(String str) {
         // Get a MD5 algorithm based Message Digest
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("MD5");
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             return null;
         }
 
@@ -66,6 +65,6 @@ final public class Encryption {
     }
 
     public static void main(String[] args) {
-         System.out.println("admin: " +md5("admin"));
+        System.out.println("admin: " + md5("admin"));
     }
 }

@@ -2,8 +2,8 @@
  * 
  */
 
-function approveCase(){
-	
-	finalize([{name:'finalizeRequest', value:true}]);
-	
+function approveCase() {
+
+    finalize([{name: 'finalizeRequest', value: true}]);
+
 }

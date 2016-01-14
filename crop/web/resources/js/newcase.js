@@ -2,8 +2,8 @@
  * 
  */
 
-function finalizeNewCase(){
-	
-	finalize([{name:'finalizeRequest', value:true}]);
-	
+function finalizeNewCase() {
+
+    finalize([{name: 'finalizeRequest', value: true}]);
+
 }

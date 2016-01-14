@@ -54,66 +54,73 @@ public class HoldingDataBean implements Serializable {
         cropList = masterDataHandlerBean.getCropAsSelectItemList();
 
     }
-public void save(){
-    System.out.println("saving start");
+
+    public void save() {
+        System.out.println("saving start");
         try {
             FormServer formServer = ModuleServer.formServer();
             ClientContext ctx = null;
-            int serviceId  = ServiceIds.DATA_ENTRY;
+            int serviceId = ServiceIds.DATA_ENTRY;
             int operaionId = OperationIds.P_HOLDING_DATA;
-            
-            
+
             holdingData.setStateUT(stateCd);
-            holdingData.setDistCd(stateCd);
+            holdingData.setDistCd(districtCd);
             holdingData.setTehsCd(tehsilCd);
             holdingData.setVillCd(villageCd);
             FormData formData = new FormData(ctx, holdingData, serviceId, operaionId);
             Object ret = formServer.process(formData);
-            if(ret!=null){
-            int returnVal = (int)ret;
-            System.out.println("returnVal  --> "+ret);}else{
+            if (ret != null) {
+                int returnVal = (int) ret;
+                System.out.println("returnVal  --> " + ret);
+            } else {
                 System.out.println("formprocess retrun null");
             }
             JSFUtils.addFacesInfoMessage("Data Saved Successfully.");
             holdingData = new HoldingDataDO();
-            
+
         } catch (RemoteException ex) {
-           System.out.println(ex.getMessage());
+            System.out.println(ex.getMessage());
         } catch (ClientException ex) {
             System.out.println(ex.getMessage());
             JSFUtils.addFacesWarningMessage(ex.getMessage());
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            JSFUtils.addFacesErrorMessage("Technial Problem - "+ex.getMessage());
-        } 
+            JSFUtils.addFacesErrorMessage("Technial Problem - " + ex.getMessage());
+        }
 
-}
+    }
 
-public void reset(){
-HoldingDataBean holdingData = new HoldingDataBean();
-stateCd="-1";
-districtCd="-1";
-tehsilCd="-1";
-villageCd="-1";
-cropCd="-1";
-}
+    public void reset() {
+        HoldingDataBean holdingData = new HoldingDataBean();
+        stateCd = "-1";
+        districtCd = "-1";
+        tehsilCd = "-1";
+        villageCd = "-1";
+        cropCd = "-1";
+    }
+
     public List<SelectItem> updateDistrictList() {
         districtList = masterDataHandlerBean.getDistrictAsSelectItemList(stateCd);
-        tehsilList =null;
+        tehsilList = null;
         villageList = null;
+        districtCd = "-1";
+        tehsilCd = "-1";
+        villageCd = "-1";
         return districtList;
     }
 
     public List<SelectItem> updateTehsilList() {
         tehsilList = masterDataHandlerBean.getTehsilAsSelectItemList(districtCd);
         villageList = null;
+        tehsilCd = "-1";
+        villageCd = "-1";
         return tehsilList;
     }
 
     public List<SelectItem> updateVillageList() {
-        
-        villageList =  masterDataHandlerBean.getVillageAsSelectItemList(tehsilCd);
+
+        villageList = masterDataHandlerBean.getVillageAsSelectItemList(tehsilCd);
+        villageCd = "-1";
         return villageList;
     }
 
@@ -284,8 +291,5 @@ cropCd="-1";
     public void setHoldingData(HoldingDataDO holdingData) {
         this.holdingData = holdingData;
     }
-
-
-   
 
 }

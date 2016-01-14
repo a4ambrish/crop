@@ -24,14 +24,14 @@ import server.db.connection.TransactionManagerLocal;
  *
  * @author ambrish
  */
-public class AuthServerImpl implements AuthServer,Serializable {
+public class AuthServerImpl implements AuthServer, Serializable {
 
     @Override
     public ClientContext authenticateUser(String userid, String saltedPassword, String saltKey, String poolName) throws RemoteException, ClientException, UserAuthenticationException {
         ClientContext clientContext = null;
         try {
-            System.out.println("saltedPassword  "+saltedPassword);
-            System.out.println("saltKey  "+saltKey);
+            System.out.println("saltedPassword  " + saltedPassword);
+            System.out.println("saltKey  " + saltKey);
             String sqlQuery = "select user_id,user_password,user_name,email,mobile,active_ind,remarks from user_detail where user_id=?";
             TransactionManagerLocal tmgr = new TransactionManagerLocal("AuthServerImpl:authenticateUser");
             PreparedStatement prstmt = tmgr.prepareStatement(sqlQuery);
@@ -45,7 +45,7 @@ public class AuthServerImpl implements AuthServer,Serializable {
                 String remarks = rs.getString("remarks");
 
                 String saltedDBPassword = Encryption.md5(userPassword + saltKey);
-                System.out.println("saltedDBPassword   "+saltedDBPassword);
+                System.out.println("saltedDBPassword   " + saltedDBPassword);
                 if (saltedPassword.equalsIgnoreCase(saltedDBPassword)) {
 
                     clientContext = new ClientContext(userid, userName, mobile, activeInd, remarks);

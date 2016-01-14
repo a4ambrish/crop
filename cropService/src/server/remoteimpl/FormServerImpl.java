@@ -28,7 +28,7 @@ import server.db.connection.TransactionManagerLocal;
  *
  * @author ambrish
  */
-public class FormServerImpl implements FormServer,Serializable {
+public class FormServerImpl implements FormServer, Serializable {
 
     @Override
     public Object process(FormData data) throws RemoteException, ClientException {

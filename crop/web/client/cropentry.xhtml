@@ -33,7 +33,7 @@
                                      required="true" requiredMessage="Please Select District" label="District">
                         <f:selectItems value="#{cropDataBean.districtList}"/>
                         <p:ajax listener="#{cropDataBean.updateTehsilList()}" update="lstTehsil lstVillage"/>
-                        
+
                     </p:selectOneMenu>
 
                     <p:outputLabel for="lstTehsil" value="Tehsil"/>
@@ -46,9 +46,9 @@
                     <p:selectOneMenu id="lstVillage" value="#{cropDataBean.villageCd}" required="true" requiredMessage="Please Select Village" label="Village">
                         <f:selectItems value="#{cropDataBean.villageList}"/>
                     </p:selectOneMenu>
-                     <p:outputLabel for="txtCropSrNo" value="Crop Sr No"/>
-                     <p:inputText id="txtCropSrNo" value="#{cropDataBean.cropData.cropSrNo}" required="true" requiredMessage="Please Select Crop" label="Crop Sr No"/>
-                     
+                    <p:outputLabel for="txtCropSrNo" value="Crop Sr No"/>
+                    <p:inputText id="txtCropSrNo" value="#{cropDataBean.cropData.cropSrNo}" required="true" requiredMessage="Please Select Crop" label="Crop Sr No"/>
+
                     <p:outputLabel for="lstCrop" value="Select Crop"/>
                     <p:selectOneMenu id="lstCrop" value="#{cropDataBean.cropCd}" required="true" requiredMessage="Please Select Crop" label="Crop">
                         <f:selectItems value="#{cropDataBean.cropList}"/>
@@ -61,21 +61,21 @@
                                  requiredMessage="Please enter Sr No" label="Sr No"
                                  >
                     </p:inputText>
-                    
+
                     <p:outputLabel for='txtAreaIrrigated' value="Area Irrigated"/>
                     <p:inputText id='txtAreaIrrigated' value="#{cropDataBean.cropData.areaIrrigated}" required="true"
                                  requiredMessage="Please enter Area Irrigated" label="Area Irrigated"
                                  >
                     </p:inputText>
-                       
+
                     <p:outputLabel for='txtAreaUnIrrigated' value="Area Un-Irrigated"/>
                     <p:inputText id='txtAreaUnIrrigated' value="#{cropDataBean.cropData.areaUnIrrigated}" required="true"
                                  requiredMessage="Please enter Area Un-Irrigated" label="Area Un-Irrigated"
                                  >
                     </p:inputText>
-                    
-                    
-                    
+
+
+
                 </p:panelGrid>
                 <p:panelGrid >
                     <p:spacer height="10" width="10" />

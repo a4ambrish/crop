@@ -21,7 +21,6 @@ import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 /**
  * This class is used for configuring db.properties file
  *
@@ -94,10 +93,10 @@ public class ConfigureUserServer {
                                 editSessionTimeOut, dbType, logFile, prefix);
                         //concatenates the pool name, connection url and username and stores in printData of type String
                         String printData = "Pool Name:" + poolName + "\nDB Url:" + connectionURL + "\n User Name:" + userName;
-                       // System.out.println(printData);
+                        // System.out.println(printData);
                         String print = "Data:-\n" + "RTO_PREFIX:" + ApplicationConfig.RTO_PREFIX + "\nSTATE_CD:" + ApplicationConfig.STATE_CD + "\nRTO_CD:" + ApplicationConfig.RTO_CD + "\n_VERSION:" + ApplicationConfig._VERSION + "\nDATABASE_DRIVER:" + ApplicationConfig.CONNECTION_URL + "\nUSER_NAME:" + ApplicationConfig.USER_NAME + "\nUSER_PASSWORD:" + ApplicationConfig.USER_PASSWORD + "\nMAX_CON:" + ApplicationConfig.MAX_CON + "\nSERVER_IP:" + ApplicationConfig.SERVER_IP + "\nRDBMS_NAME:" + ApplicationConfig.RDBMS_NAME + "\nREGISTRY_PORT:" + ApplicationConfig.REGISTRY_PORT + "\nUSER_SESSION_TIMEOUT_SEC:" + ApplicationConfig.USER_SESSION_TIMEOUT_SEC + "\nEDIT_SESSION_TIMEOUT_SEC:" + ApplicationConfig.EDIT_SESSION_TIMEOUT_SEC + "\nDB_TYPE:" + ApplicationConfig.DB_TYPE + " \nTABLE_VT:" + ApplicationConfig.TABLE_VT + "\nTABLE_VM:" + ApplicationConfig.TABLE_VM + "\nTABLE_VH:" + ApplicationConfig.TABLE_VH + "\nTABLE_VST:" + ApplicationConfig.TABLE_VST;
                         //System.out.println(print);
-                           LOGGER.info(printData);
+                        LOGGER.info(printData);
                         LOGGER.info(print);
                     }
                 }

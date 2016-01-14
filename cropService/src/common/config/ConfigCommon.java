@@ -21,21 +21,27 @@ package common.config;
 // NONE
 //
 
-
 /**
- * Provides the Configuration Properties values for the  the 
- * Client and  Server using the ConfigCommon.properties file.
+ * Provides the Configuration Properties values for the the Client and Server
+ * using the ConfigCommon.properties file.
  *
  * @author RCN
  */
 abstract public class ConfigCommon {
-    /** Common Configuration (Properties) File */
+
+    /**
+     * Common Configuration (Properties) File
+     */
     private static final String PROPERTY_FILE = "ConfigCommon";
-    /** Variable to Store State Name...DIV21July2008 */
+    /**
+     * Variable to Store State Name...DIV21July2008
+     */
     public static String STATE_NAME;
-    
-    /** Variable to Store RTO Name...DIV21July2008 */
+
+    /**
+     * Variable to Store RTO Name...DIV21July2008
+     */
     public static String RTO_NAME;
-    
+
     // Nothing to define
 }

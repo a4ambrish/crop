@@ -1,26 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-<h:form id="frmClientMenu" >
-	<p:growl id="messages" showDetail="false" />
-    <p:menu>
-        <p:submenu label="Data Entry">
-            <p:menuitem value="Holding Data Entry" outcome="/client/holdingentry" ajax="false"/>
-            <p:menuitem value="Crop Data Entry"  outcome="/client/cropentry" ajax="false"/>
-        </p:submenu>
-        <p:submenu label="Exit">
-            <p:menuitem value="Exit"   icon="ui-icon-close" outcome="/index" ajax="false"/>
-        </p:submenu>
-        <p:submenu label="Navigations">
-            <p:menuitem value="Test --1 " url="http://www.primefaces.org" icon="ui-icon-home"/>
-            <p:menuitem value="Test --2"  icon="ui-icon-star"/>
-        </p:submenu>
-    </p:menu>
-</h:form>
+    <h:form id="frmClientMenu" >
+        <p:growl id="messages" showDetail="false" />
+        <p:menu>
+            <p:submenu label="Data Entry">
+                <p:menuitem value="Holding Data Entry" outcome="/client/holdingentry" ajax="false"/>
+                <p:menuitem value="Crop Data Entry"  outcome="/client/cropentry" ajax="false"/>
+            </p:submenu>
+            <p:submenu label="Exit">
+                <p:menuitem value="Exit"   icon="ui-icon-close" outcome="/index" ajax="false"/>
+            </p:submenu>
+            <p:submenu label="Navigations">
+                <p:menuitem value="Test --1 " url="http://www.primefaces.org" icon="ui-icon-home"/>
+                <p:menuitem value="Test --2"  icon="ui-icon-star"/>
+            </p:submenu>
+        </p:menu>
+    </h:form>
 
 </html>

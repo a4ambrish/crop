@@ -32,8 +32,6 @@ import javax.sql.*;
 import nic.java.util.*;
 import common.ClientException;
 
-
-
 import server.db.connection.ConnectionPooling;
 
 public abstract class DBUtils {
@@ -59,13 +57,13 @@ public abstract class DBUtils {
      * @param warn SQLWarning object.
      */
     public static void displayWarnings(SQLWarning warn) {
-       // System.out.println("\n************ W A R N I N G S*************\n");
+        // System.out.println("\n************ W A R N I N G S*************\n");
         //checks warn is not null
         while (warn != null) {
-        //    System.out.println("SQLState   : " + warn.getSQLState());
-         //   System.out.println("Message    : " + warn.getMessage());
-         //   System.out.println("Error Code : " + warn.getErrorCode());
-          //  System.out.println();
+            //    System.out.println("SQLState   : " + warn.getSQLState());
+            //   System.out.println("Message    : " + warn.getMessage());
+            //   System.out.println("Error Code : " + warn.getErrorCode());
+            //  System.out.println();
             //retrieves the warning chained to sql warning
             warn = warn.getNextWarning();
         }
@@ -114,8 +112,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Return the Data Base Information like DB name, driver,
-     * version etc in the form of a string.
+     * Return the Data Base Information like DB name, driver, version etc in the
+     * form of a string.
      *
      * @param con Database connection.
      *
@@ -184,12 +182,12 @@ public abstract class DBUtils {
     }
 
     /**
-     * Write the data onto the jsp stream if given. If given null
-     * then append the data into the given string buffer.
+     * Write the data onto the jsp stream if given. If given null then append
+     * the data into the given string buffer.
      *
      * @param data Given string data
-     * @param out JspWriter Stream object. Could be null. If it is
-     *        null then the data is populated in the given StringBuffer.
+     * @param out JspWriter Stream object. Could be null. If it is null then the
+     * data is populated in the given StringBuffer.
      * @param sbuf StringBuffer object
      *
      * @throws IOException
@@ -202,15 +200,13 @@ public abstract class DBUtils {
     }
 
     /**
-     * Write the data onto the jsp stream if given. If given null
-     * then append the data into the given string buffer.
-     * It also updates report length by adding the char length of the
-     * given data string.
+     * Write the data onto the jsp stream if given. If given null then append
+     * the data into the given string buffer. It also updates report length by
+     * adding the char length of the given data string.
      *
      * @param data Given string data
-     * @param out JspWriter Stream object. Could be null. If it is
-     *        null then the data is populated in the given
-     *        StringBuffer.
+     * @param out JspWriter Stream object. Could be null. If it is null then the
+     * data is populated in the given StringBuffer.
      * @param sbuf StringBuffer object
      * @param reportSize Char count in the Report (reportSize[0])
      * @throws IOException
@@ -234,8 +230,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Get the record counts in the given Scrollable ResultSet. After
-     * get the count set the location before the first.
+     * Get the record counts in the given Scrollable ResultSet. After get the
+     * count set the location before the first.
      *
      * @param rs Given Scrollable ResultSet
      *
@@ -266,8 +262,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Get the record counts in the given Scrollable RowSet. After
-     * get the count set the location before the first.
+     * Get the record counts in the given Scrollable RowSet. After get the count
+     * set the location before the first.
      *
      * @param rs Given Scrollable RowSet
      *
@@ -299,8 +295,7 @@ public abstract class DBUtils {
     }
 
     /**
-     * Displays the results from a ResultSet cursor.
-     * This is used for debugging.
+     * Displays the results from a ResultSet cursor. This is used for debugging.
      *
      * @param rs ResultSet object whose data need to be displayed.
      *
@@ -330,7 +325,6 @@ public abstract class DBUtils {
         System.out.println();
     }
 
-    
     /**
      * Get the Clob data in the String object
      *
@@ -369,11 +363,11 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns count(*) from a given table using the given
-     * where clause.
+     * Returns count(*) from a given table using the given where clause.
      *
      * @param tableName Table Name
-     * @param whereClause The SQL WHERE clause string. Provide null if no where clause needed.
+     * @param whereClause The SQL WHERE clause string. Provide null if no where
+     * clause needed.
      *
      * @return Number of the records found based on inputs
      *
@@ -399,7 +393,6 @@ public abstract class DBUtils {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
-
 
         try {
             // Connection/Statement/ResultSet
@@ -467,20 +460,17 @@ public abstract class DBUtils {
         // Get the column name
         String cname = null;
 
-
         try {
 
             con = ConnectionPooling.getDBConnectionLocal();
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
 
-
             ResultSetMetaData rmeta = rs.getMetaData();
             int columnCount = rmeta.getColumnCount();
             if (colNum < 1 || colNum > columnCount) {
                 throw new ClientException("DEV_ERROR : Given column number " + colNum + " is outside of column number range.");
             }
-
 
             cname = rmeta.getColumnName(colNum);
         } catch (Exception e) {
@@ -582,9 +572,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns the max number used so far for the PK (assuming
-     * that the first column is PK and is of NUMBER type) for
-     * the given table.
+     * Returns the max number used so far for the PK (assuming that the first
+     * column is PK and is of NUMBER type) for the given table.
      *
      * @param tname Table Name
      *
@@ -657,7 +646,7 @@ public abstract class DBUtils {
      * Returns the max timestamp used so far in the given audit table.
      *
      * @param tname Table Name
-     * @param id    ID Name
+     * @param id ID Name
      * @param idVal ID Value
      *
      * @return Max number used so far for the PK
@@ -730,8 +719,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Method to execute a SQL-SELECT statement and return a DETACHED
-     * RowSet (ResultSet).
+     * Method to execute a SQL-SELECT statement and return a DETACHED RowSet
+     * (ResultSet).
      *
      * @param selectSQL - SELECT statement to be executed.
      *
@@ -751,7 +740,6 @@ public abstract class DBUtils {
 
         // Log sql
         //Debug.logsql(selectSQL);
-
         // Connection/Statement/ResultSet
         Connection con = null;
         Statement stmt = null;
@@ -796,9 +784,9 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns Date as String. Takes a reference of the RowSet and the name
-     * of the field in it. This then returns a String by checking
-     * what type of database is being currently used by .
+     * Returns Date as String. Takes a reference of the RowSet and the name of
+     * the field in it. This then returns a String by checking what type of
+     * database is being currently used by .
      *
      * @param rs RowSet from which the date has to be extracted
      * @param fieldName Name of the date field in the RowSet
@@ -812,8 +800,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns a java.util.Date. Takes a reference of the RowSet and the name
-     * of the field in it. This then returns a java.util.Date object by checking
+     * Returns a java.util.Date. Takes a reference of the RowSet and the name of
+     * the field in it. This then returns a java.util.Date object by checking
      * what type of database is being currently used by .
      *
      * @param rs RowSet from which the date has to be extracted
@@ -853,11 +841,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns string with the DB server's current date syntax
-     *   These may be:-
-     *          If Oracle - SYSDATE
-     *          If MSSQL  - getDate()
-     *          If DB2    - CURRENT DATE
+     * Returns string with the DB server's current date syntax These may be:- If
+     * Oracle - SYSDATE If MSSQL - getDate() If DB2 - CURRENT DATE
      *
      * @return Returns string which when appended to SQL will give current date
      */
@@ -887,8 +872,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns a formatted string for SELECT sql which checks for null column value.
-     * And replaces it by the maximum possible value of numbers.
+     * Returns a formatted string for SELECT sql which checks for null column
+     * value. And replaces it by the maximum possible value of numbers.
      *
      * @param columnName Name of the column to be replaced
      *
@@ -899,8 +884,8 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns a formatted string for SELECT sql which checks for null column value.
-     * And replaces it by 0 (Zero).
+     * Returns a formatted string for SELECT sql which checks for null column
+     * value. And replaces it by 0 (Zero).
      *
      * @param columnName Name of the column to be replaced
      *
@@ -911,15 +896,13 @@ public abstract class DBUtils {
     }
 
     /**
-     * Returns a formatted string for SELECT sql which checks for null column value.
-     * And replaces it by the maximum possible value of that column.
+     * Returns a formatted string for SELECT sql which checks for null column
+     * value. And replaces it by the maximum possible value of that column.
      * Note: The maxValue parameter if used for any datatype other than number
      * (like date) must be formatted by using FormatUtils.fdwc()
      *
-     *   The formats for null checks are:-
-     *          If Oracle - NVL
-     *          If MSSQL  - ISNULL
-     *          If DB2    - COALESCE
+     * The formats for null checks are:- If Oracle - NVL If MSSQL - ISNULL If
+     * DB2 - COALESCE
      *
      * @param columnName Name of the column to be replaced
      * @param maxValue Maximum value to be used

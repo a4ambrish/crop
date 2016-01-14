@@ -23,7 +23,6 @@ package server.common;
 //import java.util.Date;
 //import server.config.ApplicationConfig;
 //end
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -70,7 +69,6 @@ public class CommonMethods {
             if (args.length == 1) {
                 vm_sql = "SELECT CODE,DESCR FROM " + args[0] + "";
 
-
             } else if (args.length == 2) {
                 vm_sql = "SELECT CODE,DESCR FROM " + args[0] + " WHERE VH_TYPE='" + args[1] + "'";
             }
@@ -81,12 +79,9 @@ public class CommonMethods {
                 list.add(new SelectItem(rs.getString("code"), rs.getString("descr")));
             }
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return list;
 
@@ -100,7 +95,6 @@ public class CommonMethods {
 
             vm_sql = "SELECT CODE,DESCR FROM VM_RJ_VH_TYPES WHERE CODE='" + code + "'";
 
-
             System.out.println("vm_sql " + vm_sql);
             RowSet rs = DBUtils.fetchDetachedRowSet(vm_sql);
 
@@ -108,12 +102,9 @@ public class CommonMethods {
                 result = (String) rs.getString("DESCR");
             }
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return result;
 
@@ -127,7 +118,6 @@ public class CommonMethods {
 
             vm_sql = "SELECT CODE,CHECKPOST_NAME FROM VM_CHECKPOST_NAME WHERE DISTRICT_CD='" + code + "'";
 
-
             System.out.println("vm_sql " + vm_sql);
             RowSet rs = DBUtils.fetchDetachedRowSet(vm_sql);
             list.add(new SelectItem("-1", "SELECT"));
@@ -135,12 +125,9 @@ public class CommonMethods {
                 list.add(new SelectItem(rs.getString("CODE"), rs.getString("CHECKPOST_NAME")));
             }
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return list;
 
@@ -154,7 +141,6 @@ public class CommonMethods {
 
             vm_sql = "SELECT CODE,CHECKPOST_NAME FROM VM_CHECKPOST_NAME";
 
-
             System.out.println("vm_sql " + vm_sql);
             RowSet rs = DBUtils.fetchDetachedRowSet(vm_sql);
             list.add(new SelectItem("-1", "SELECT"));
@@ -163,12 +149,9 @@ public class CommonMethods {
                 list.add(new SelectItem(rs.getString("CHECKPOST_NAME"), rs.getString("CHECKPOST_NAME")));
             }
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return list;
 
@@ -408,6 +391,7 @@ public class CommonMethods {
 
     /**
      * Method to return standard date time in string format
+     *
      * @return
      */
     public static String getStandardCurrentDateTimeAsString() {
@@ -429,16 +413,14 @@ public class CommonMethods {
         return ((toTime - frmTime) / (24 * 60 * 60 * 1000));
 
     }
-    
+
 //    public static int getLastDayOfMonth(Date date)
 //    {
 //        Calendar calendar = Calendar.getInstance();
 //        calendar.setTime(date);
 //        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 //    }
-    
-    public static String getLastDay(Date d) throws Exception
-    {
+    public static String getLastDay(Date d) throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(d);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -446,9 +428,8 @@ public class CommonMethods {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
         return sdf1.format(dddd);
     }
-    
-    public static String getFirstDay(Date d) throws Exception
-    {
+
+    public static String getFirstDay(Date d) throws Exception {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(d);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
@@ -456,8 +437,7 @@ public class CommonMethods {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
         return sdf1.format(dddd);
     }
-    
-   
+
     public static String md5_hex(String passwd) {
         String rtnMd5 = "";
         if (passwd != null && !passwd.equalsIgnoreCase("")) {
@@ -588,8 +568,6 @@ public class CommonMethods {
         }
         return dt;
     }
-    
-  
 
     public static Date getStringToDate(String strDt) {
         //return variable

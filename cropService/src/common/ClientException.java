@@ -16,8 +16,8 @@ package common;
 //
 // Importing Common java packages/classes
 //
-import nic.java.util.InstanceCount;
 
+import nic.java.util.InstanceCount;
 
 /**
  * Top parent expception class for Application Server
@@ -25,6 +25,7 @@ import nic.java.util.InstanceCount;
  * @author RCN
  */
 public class ClientException extends Exception {
+
     /**
      * Constructor
      */
@@ -38,13 +39,13 @@ public class ClientException extends Exception {
      */
     public ClientException(String msg) {
         super(msg);
-        InstanceCount.add(this);        
+        InstanceCount.add(this);
     }
-    
-    /** 
-     * Override finalize() 
+
+    /**
+     * Override finalize()
      */
     public void finalize() {
         InstanceCount.remove(this);
-    }    
+    }
 }

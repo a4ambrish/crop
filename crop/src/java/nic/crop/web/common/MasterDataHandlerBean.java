@@ -28,7 +28,7 @@ import server.remoteimpl.TableServerImpl;
  */
 @ManagedBean(eager = true)
 @ApplicationScoped
-public class MasterDataHandlerBean implements Serializable{
+public class MasterDataHandlerBean implements Serializable {
 
     ArrayList<StateMasterDO> stateList = new ArrayList<StateMasterDO>();
     ArrayList<DistrictMasterDO> districtList = new ArrayList<DistrictMasterDO>();
@@ -79,7 +79,7 @@ public class MasterDataHandlerBean implements Serializable{
         for (int i = 0; i < districtList.size(); i++) {
             SelectItem selectItem = new SelectItem();
             DistrictMasterDO dobj = districtList.get(i);
-            
+
             if (dobj.getStateUT().equals(stateCd)) {
                 selectItem.setValue(dobj.getDistCd());
                 selectItem.setLabel(dobj.getDistName());

@@ -16,8 +16,8 @@ package common;
 //
 // Importing Common java packages/classes
 //
-import nic.java.util.InstanceCount;
 
+import nic.java.util.InstanceCount;
 
 /**
  * Top parent runtime expception class for Client
@@ -25,12 +25,13 @@ import nic.java.util.InstanceCount;
  * @author RCN
  */
 public class ClientRuntimeException extends RuntimeException {
+
     /**
      * Constructor
      */
     public ClientRuntimeException() {
         super();
-        InstanceCount.add(this);        
+        InstanceCount.add(this);
     }
 
     /**
@@ -38,13 +39,13 @@ public class ClientRuntimeException extends RuntimeException {
      */
     public ClientRuntimeException(String msg) {
         super(msg);
-        InstanceCount.add(this);        
+        InstanceCount.add(this);
     }
-    
+
     /**
      * Override finalize()
      */
     public void finalize() {
         InstanceCount.remove(this);
-    }    
+    }
 }

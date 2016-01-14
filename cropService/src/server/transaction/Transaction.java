@@ -31,7 +31,7 @@ import server.db.connection.TransactionManagerLocal;
  */
 public class Transaction {
 
-     /**
+    /**
      * Method to get the unique temporary transaction id
      *
      * @param tmgr

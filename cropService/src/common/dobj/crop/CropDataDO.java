@@ -173,6 +173,4 @@ public class CropDataDO extends DO {
         return "CropDataDO{" + "stateUT=" + stateUT + ", distCd=" + distCd + ", tehsCd=" + tehsCd + ", villCd=" + villCd + ", srNo=" + srNo + ", cropSrNo=" + cropSrNo + ", cropCd=" + cropCd + ", areaIrrigated=" + areaIrrigated + ", areaUnIrrigated=" + areaUnIrrigated + '}';
     }
 
-   
-
 }

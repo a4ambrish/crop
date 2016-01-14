@@ -16,8 +16,8 @@ package common.printing;
 //
 // Importing Client/Common java packages/classes
 //
-import common.*;
 
+import common.*;
 
 /**
  * Exception class for printing process
@@ -25,13 +25,14 @@ import common.*;
  * @author RCN
  */
 public class PrintDataException extends ClientException {
+
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTORS
     ////////////////////////////////////////////////////////////////////////
     public PrintDataException() {
         super();
     }
-    
+
     public PrintDataException(String msg) {
         super(msg);
     }

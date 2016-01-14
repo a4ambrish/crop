@@ -17,8 +17,8 @@ package common;
 //
 // Importing Server/Common java packages/classes
 //
-import nic.java.util.InstanceCount;
 
+import nic.java.util.InstanceCount;
 
 /**
  * Parent of all the classes specific to Client (not really, wherever possible)
@@ -26,14 +26,15 @@ import nic.java.util.InstanceCount;
  * @author RCN
  */
 public abstract class ClientObject {
-    /** 
+
+    /**
      * Constructor
      */
     public ClientObject() {
         InstanceCount.add(this);
     }
 
-    /** 
+    /**
      * Override finalize()
      */
     public void finalize() {

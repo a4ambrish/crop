@@ -16,8 +16,6 @@ public class CropMasterDO extends DO {
     private String cropCd;
     private String cropName;
 
-    
-    
     @Override
     public void reset() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

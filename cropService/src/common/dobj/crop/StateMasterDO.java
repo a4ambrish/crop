@@ -59,6 +59,4 @@ public class StateMasterDO extends DO {
         this.stateName = stateName;
     }
 
-    
-    
 }

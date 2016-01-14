@@ -12,13 +12,13 @@ package server.common;
 
 /**
  * This class is used for providing common constants throughout the project
- * 
+ *
  * @author vijay.dr
  */
-public class CommonConstants
-{
-    public static String EMPTY  = "";
-    public static String SEPERATOR  = ":";
+public class CommonConstants {
+
+    public static String EMPTY = "";
+    public static String SEPERATOR = ":";
     public static String LOGIN_LOGOUT = "loginlogout";
     public static String PUBLIC = "public";
     public static String USER = "user";

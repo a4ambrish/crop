@@ -46,47 +46,47 @@ public class UrlRewriteFilter implements Filter {
         // This is ONLY triggered if the request did not also contain a JSESSIONID cookie! Which should be fine for bots...
         if (request.isRequestedSessionIdFromURL()) {
             String url = request.getRequestURL()
-                         .append(request.getQueryString() != null ? "?"+request.getQueryString() : "")
-                         .toString();
+                    .append(request.getQueryString() != null ? "?" + request.getQueryString() : "")
+                    .toString();
             response.setHeader("Location", url);
             response.sendError(HttpServletResponse.SC_MOVED_PERMANENTLY);
             return;
         }
 
         // Prevent rendering of JSESSIONID in URLs for all outgoing links
-        HttpServletResponseWrapper wrappedResponse =
-            new HttpServletResponseWrapper(response) {
-                @Override
-                public String encodeRedirectUrl(String url) {
-                    return url;
-                }
+        HttpServletResponseWrapper wrappedResponse
+                = new HttpServletResponseWrapper(response) {
+                    @Override
+                    public String encodeRedirectUrl(String url) {
+                        return url;
+                    }
 
-                @Override
-                public String encodeRedirectURL(String url) {
-                    return url;
-                }
+                    @Override
+                    public String encodeRedirectURL(String url) {
+                        return url;
+                    }
 
-                @Override
-                public String encodeUrl(String url) {
-                    return url;
-                }
+                    @Override
+                    public String encodeUrl(String url) {
+                        return url;
+                    }
 
-                @Override
-                public String encodeURL(String url) {
-                    return url;
-                }
-            };
+                    @Override
+                    public String encodeURL(String url) {
+                        return url;
+                    }
+                };
         chain.doFilter(req, wrappedResponse);
 
     }
 
-     public void destroy() {
-          // TODO Auto-generated method stub
+    public void destroy() {
+        // TODO Auto-generated method stub
 
-     }
+    }
 
-     public void init(FilterConfig arg0) throws ServletException {
-          // TODO Auto-generated method stub
+    public void init(FilterConfig arg0) throws ServletException {
+        // TODO Auto-generated method stub
 
-     }
+    }
 }

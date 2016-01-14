@@ -17,28 +17,29 @@ package common.context;
 //
 // Importing Common java packages/classes
 //
+
 import common.*;
 
-
-/** 
+/**
  * Exception class to check invalid choice.
- * 
+ *
  * @author JIS
  */
 public class UserServicesException extends ClientException {
+
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR(S)
     ////////////////////////////////////////////////////////////////////////    
-    /** 
+    /**
      * Creates a new instance of UserServicesException.
      */
     public UserServicesException() {
         super();
     }
-    
-    /** 
+
+    /**
      * Creates a new instance of UserServicesException.
-     * 
+     *
      * @param msg Message for the exception object created.
      */
     public UserServicesException(String msg) {

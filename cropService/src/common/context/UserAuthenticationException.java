@@ -17,30 +17,31 @@ package common.context;
 //
 // Importing Common java packages/classes
 //
+
 import common.*;
 
-
-/** 
- * Used for user authentication failure.
- * Exception is created when there is invalid userid or password.
- * Also created when the user is disabled and tries to log on.
- * 
+/**
+ * Used for user authentication failure. Exception is created when there is
+ * invalid userid or password. Also created when the user is disabled and tries
+ * to log on.
+ *
  * @author JIS
  */
 public class UserAuthenticationException extends ClientException {
+
     ////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR(S)
     ////////////////////////////////////////////////////////////////////////    
-    /** 
+    /**
      * Creates a new instance of UserAuthenticationException.
      */
     public UserAuthenticationException() {
-       super(); 
+        super();
     }
-    
-    /** 
+
+    /**
      * Creates a new instance of UserAuthenticationException.
-     * 
+     *
      * @param msg Message for the exception object created.
      */
     public UserAuthenticationException(String msg) {

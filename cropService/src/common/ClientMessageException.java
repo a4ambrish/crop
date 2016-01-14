@@ -18,11 +18,11 @@ package common;
 //
 // NONE
 
-
 /**
  * Exception class for handling client messages
  */
 public class ClientMessageException extends ClientException {
+
     /**
      * Constructor
      */
