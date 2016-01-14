@@ -11,6 +11,7 @@ import common.ModuleServer;
 import common.OperationIds;
 import common.ServiceIds;
 import common.context.ClientContext;
+import common.dobj.crop.CropDataDO;
 import common.dobj.crop.HoldingDataDO;
 import common.remote.FormServer;
 import java.io.Serializable;
@@ -31,7 +32,7 @@ import nic.crop.web.common.MasterDataHandlerBean;
  */
 @ManagedBean
 @ViewScoped
-public class HoldingDataBean implements Serializable {
+public class CropDataBean implements Serializable {
 
     private MasterDataHandlerBean masterDataHandlerBean = null;
     private List<SelectItem> stateList = null;
@@ -45,9 +46,9 @@ public class HoldingDataBean implements Serializable {
     private String villageCd;
     private String cropCd;
 
-    private HoldingDataDO holdingData = new HoldingDataDO();
+    private CropDataDO cropData = new CropDataDO();
 
-    public HoldingDataBean() {
+    public CropDataBean() {
 
         masterDataHandlerBean = (MasterDataHandlerBean) JSFUtils.getFromApplication("masterDataHandlerBean");
         stateList = masterDataHandlerBean.getStateAsSelectItemList();
@@ -60,14 +61,16 @@ public void save(){
             FormServer formServer = ModuleServer.formServer();
             ClientContext ctx = null;
             int serviceId  = ServiceIds.DATA_ENTRY;
-            int operaionId = OperationIds.P_HOLDING_DATA;
+            int operaionId = OperationIds.P_CROP_DATA;
             
             
-            holdingData.setStateUT(stateCd);
-            holdingData.setDistCd(stateCd);
-            holdingData.setTehsCd(tehsilCd);
-            holdingData.setVillCd(villageCd);
-            FormData formData = new FormData(ctx, holdingData, serviceId, operaionId);
+            cropData.setStateUT(stateCd);
+            cropData.setDistCd(districtCd);
+            cropData.setTehsCd(tehsilCd);
+            cropData.setVillCd(villageCd);
+            cropData.setCropCd(cropCd);
+            
+            FormData formData = new FormData(ctx, cropData, serviceId, operaionId);
             Object ret = formServer.process(formData);
             if(ret!=null){
             int returnVal = (int)ret;
@@ -75,7 +78,7 @@ public void save(){
                 System.out.println("formprocess retrun null");
             }
             JSFUtils.addFacesInfoMessage("Data Saved Successfully.");
-            holdingData = new HoldingDataDO();
+            cropData = new CropDataDO();
             
         } catch (RemoteException ex) {
            System.out.println(ex.getMessage());
@@ -91,23 +94,27 @@ public void save(){
 }
 
 public void reset(){
-HoldingDataBean holdingData = new HoldingDataBean();
+CropDataDO cropData = new CropDataDO();
 stateCd="-1";
 districtCd="-1";
 tehsilCd="-1";
 villageCd="-1";
 cropCd="-1";
+    System.out.println("form reset success");
 }
     public List<SelectItem> updateDistrictList() {
         districtList = masterDataHandlerBean.getDistrictAsSelectItemList(stateCd);
         tehsilList =null;
+        tehsilCd = "-1";
         villageList = null;
+        villageCd="-1";
         return districtList;
     }
 
     public List<SelectItem> updateTehsilList() {
         tehsilList = masterDataHandlerBean.getTehsilAsSelectItemList(districtCd);
         villageList = null;
+        villageCd="-1";
         return tehsilList;
     }
 
@@ -272,18 +279,22 @@ cropCd="-1";
     }
 
     /**
-     * @return the holdingData
+     * @return the cropData
      */
-    public HoldingDataDO getHoldingData() {
-        return holdingData;
+    public CropDataDO getCropData() {
+        return cropData;
     }
 
     /**
-     * @param holdingData the holdingData to set
+     * @param cropData the cropData to set
      */
-    public void setHoldingData(HoldingDataDO holdingData) {
-        this.holdingData = holdingData;
+    public void setCropData(CropDataDO cropData) {
+        this.cropData = cropData;
     }
+
+
+
+  
 
 
    

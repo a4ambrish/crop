@@ -84,8 +84,6 @@ function encryptedMd5()
 {
 	var random=document.getElementById("txtRandom");
 	var pwd=document.getElementById("txtPassword");
-        alert('db password single md5 '+calcMD5(pwd.value));
-        alert('randaom key '+random.value);
 	pwd.value=calcMD5(calcMD5(pwd.value)+random.value);
 	random.value="";
 	document.getElementById("login").submit();

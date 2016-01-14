@@ -39,6 +39,7 @@ public interface OperationIds {
     //........................
     // form holding data entry
     int P_HOLDING_DATA = 1;
+    int P_CROP_DATA = 2;
 
     // master data related operation ids
     int M_STATE_MASTER_DATA = 1;

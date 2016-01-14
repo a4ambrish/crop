@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/template.xhtml">
+
+    <ui:define name="metadata">
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/templates/clientmenu.xhtml" />
+    </ui:define>
+    <ui:define name="header">
+        <ui:include src="/templates/clientheader.xhtml" />
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="userhome" prependId="false">
+            <p:panel header="Crop Data Entry Form">
+                <p:messages id="errorMessage"/>
+                <p:spacer  width="10"/>
+                <p:panelGrid columns="8" id="pnlCommonData">
+                    <p:outputLabel for="lstState" value="Select State"/>
+                    <p:selectOneMenu id="lstState" value="#{cropDataBean.stateCd}" 
+                                     required="true" requiredMessage="Please Select State" 
+                                     label="State" >
+                        <p:ajax listener="#{cropDataBean.updateDistrictList()}"  update="lstDistrict lstTehsil lstVillage"/>
+                        <f:selectItems value="#{cropDataBean.stateList}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="lstDistrict" value="District"/>
+                    <p:selectOneMenu id="lstDistrict" value="#{cropDataBean.districtCd}" 
+
+                                     required="true" requiredMessage="Please Select District" label="District">
+                        <f:selectItems value="#{cropDataBean.districtList}"/>
+                        <p:ajax listener="#{cropDataBean.updateTehsilList()}" update="lstTehsil lstVillage"/>
+                        
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="lstTehsil" value="Tehsil"/>
+                    <p:selectOneMenu id="lstTehsil" value="#{cropDataBean.tehsilCd}" required="true" requiredMessage="Please Select Tehsil" label="Tehsil">
+                        <f:selectItems value="#{cropDataBean.tehsilList}"/>
+                        <p:ajax listener="#{cropDataBean.updateVillageList()}"    update="lstVillage"/>
+
+                    </p:selectOneMenu>
+                    <p:outputLabel for="lstVillage" value="Village"/>
+                    <p:selectOneMenu id="lstVillage" value="#{cropDataBean.villageCd}" required="true" requiredMessage="Please Select Village" label="Village">
+                        <f:selectItems value="#{cropDataBean.villageList}"/>
+                    </p:selectOneMenu>
+                     <p:outputLabel for="txtCropSrNo" value="Crop Sr No"/>
+                     <p:inputText id="txtCropSrNo" value="#{cropDataBean.cropData.cropSrNo}" required="true" requiredMessage="Please Select Crop" label="Crop Sr No"/>
+                     
+                    <p:outputLabel for="lstCrop" value="Select Crop"/>
+                    <p:selectOneMenu id="lstCrop" value="#{cropDataBean.cropCd}" required="true" requiredMessage="Please Select Crop" label="Crop">
+                        <f:selectItems value="#{cropDataBean.cropList}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:spacer  width="10"/>
+                <p:panelGrid columns="8" id="pnlData">
+                    <p:outputLabel for='txtSrNo' value="Sr No"/>
+                    <p:inputText id='txtSrNo' value="#{cropDataBean.cropData.srNo}" required="true"
+                                 requiredMessage="Please enter Sr No" label="Sr No"
+                                 >
+                    </p:inputText>
+                    
+                    <p:outputLabel for='txtAreaIrrigated' value="Area Irrigated"/>
+                    <p:inputText id='txtAreaIrrigated' value="#{cropDataBean.cropData.areaIrrigated}" required="true"
+                                 requiredMessage="Please enter Area Irrigated" label="Area Irrigated"
+                                 >
+                    </p:inputText>
+                       
+                    <p:outputLabel for='txtAreaUnIrrigated' value="Area Un-Irrigated"/>
+                    <p:inputText id='txtAreaUnIrrigated' value="#{cropDataBean.cropData.areaUnIrrigated}" required="true"
+                                 requiredMessage="Please enter Area Un-Irrigated" label="Area Un-Irrigated"
+                                 >
+                    </p:inputText>
+                    
+                    
+                    
+                </p:panelGrid>
+                <p:panelGrid >
+                    <p:spacer height="10" width="10" />
+                    <p:commandButton value="Save" action="#{cropDataBean.save()}" update="errorMessage pnlData"/>
+                    <p:spacer height="100" width="10"/>
+                    <p:commandButton value="Reset" action="#{cropDataBean.reset()}"  update="errorMessage pnlData pnlCommonData" process="@this"/>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

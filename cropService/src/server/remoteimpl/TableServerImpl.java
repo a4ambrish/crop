@@ -15,6 +15,7 @@ import common.dobj.crop.StateMasterDO;
 import common.dobj.crop.TehsilMasterDO;
 import common.dobj.crop.VillageMasterDO;
 import common.remote.TableServer;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import server.db.DBUtils;
  *
  * @author ambrish
  */
-public class TableServerImpl implements TableServer {
+public class TableServerImpl implements TableServer,Serializable {
 
     @Override
     public MasterTables getStoredMasterTables() throws RemoteException {

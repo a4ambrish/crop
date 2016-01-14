@@ -226,7 +226,11 @@ public class TransactionManagerLocal {
             if (prstmt != null) {
                 prstmt.close();
             }
+            if (stmt != null) {
+                stmt.close();
+            }
             if (con != null) {
+                con.rollback();
                 con.close();
             }
         } catch (SQLException ex) {

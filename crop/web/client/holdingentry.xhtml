@@ -16,49 +16,80 @@
     <ui:define name="content">
         <h:form id="userhome" prependId="false">
             <p:panel header="Holding Data Entry Form">
-                <p:panelGrid columns="6">
+                <p:messages id="errorMessage"/>
+                <p:spacer  width="10"/>
+                <p:panelGrid columns="8" id="pnlCommonData">
                     <p:outputLabel for="lstState" value="Select State"/>
                     <p:selectOneMenu id="lstState" value="#{holdingDataBean.stateCd}" 
-                                     required="true" 
-                                     requiredMessage="Please Select State" 
+                                     required="true" requiredMessage="Please Select State" 
                                      label="State" >
-
-                        <p:ajax listener="#{holdingDataBean.updateDistrictList()}"
-                                update="lstDistrict">
-                        </p:ajax>
+                        <p:ajax listener="#{holdingDataBean.updateDistrictList()}"  update="lstDistrict lstTehsil lstVillage"/>
                         <f:selectItems value="#{holdingDataBean.stateList}"/>
                     </p:selectOneMenu>
-                    
+
                     <p:outputLabel for="lstDistrict" value="District"/>
                     <p:selectOneMenu id="lstDistrict" value="#{holdingDataBean.districtCd}" 
 
                                      required="true" requiredMessage="Please Select District" label="District">
                         <f:selectItems value="#{holdingDataBean.districtList}"/>
-                        <p:ajax listener="#{holdingDataBean.updateTehsilList()}"
-                                update="lstTehsil">
-                        </p:ajax>
+                        <p:ajax listener="#{holdingDataBean.updateTehsilList()}" update="lstTehsil lstVillage"/>
+                        
                     </p:selectOneMenu>
+
                     <p:outputLabel for="lstTehsil" value="Tehsil"/>
                     <p:selectOneMenu id="lstTehsil" value="#{holdingDataBean.tehsilCd}" required="true" requiredMessage="Please Select Tehsil" label="Tehsil">
                         <f:selectItems value="#{holdingDataBean.tehsilList}"/>
-                        <p:ajax listener="#{holdingDataBean.updateVillageList()}"
-                                update="lstVillage">
-                        </p:ajax>
-                    </p:selectOneMenu>
+                        <p:ajax listener="#{holdingDataBean.updateVillageList()}"    update="lstVillage"/>
 
+                    </p:selectOneMenu>
                     <p:outputLabel for="lstVillage" value="Village"/>
                     <p:selectOneMenu id="lstVillage" value="#{holdingDataBean.villageCd}" required="true" requiredMessage="Please Select Village" label="Village">
                         <f:selectItems value="#{holdingDataBean.villageList}"/>
                     </p:selectOneMenu>
-
-
-                    <p:outputLabel for="lstCrop" value="Select Crop"/>
+<!--                    <p:outputLabel for="lstCrop" value="Select Crop"/>
                     <p:selectOneMenu id="lstCrop" value="#{holdingDataBean.cropCd}" required="true" requiredMessage="Please Select Crop" label="Crop">
                         <f:selectItems value="#{holdingDataBean.cropList}"/>
-                    </p:selectOneMenu>
-
-
-
+                    </p:selectOneMenu>-->
+                </p:panelGrid>
+                <p:spacer  width="10"/>
+                <p:panelGrid columns="8" id="pnlData">
+                    <p:outputLabel for='txtSrNo' value="Sr No"/>
+                    <p:inputText id='txtSrNo' value="#{holdingDataBean.holdingData.srNo}" required="true"
+                                 requiredMessage="Please enter Sr No" label="Sr No"
+                                 >
+                    </p:inputText>
+                    
+                    <p:outputLabel for='txtAreaSown' value="Area Sown"/>
+                    <p:inputText id='txtAreaSown' value="#{holdingDataBean.holdingData.areaSown}" required="true"
+                                 requiredMessage="Please enter Area Sown" label="Area Sown"
+                                 >
+                    </p:inputText>
+                    
+                    
+                    <p:outputLabel for='txtCurrentFallow' value="Current Fallow"/>
+                    <p:inputText id='txtCurrentFallow' value="#{holdingDataBean.holdingData.currentFallow}" required="true"
+                                 requiredMessage="Please enter Current Fallow" label="Current Fallow"
+                                 >
+                    </p:inputText>
+                    
+                    <p:outputLabel for='txtAreaUncultivated' value="Area Uncultivated"/>
+                    <p:inputText id='txtAreaUncultivated' value="#{holdingDataBean.holdingData.areaUncultivated}" required="true"
+                                 requiredMessage="Please enter Area Uncultivated" label="Area Uncultivated"
+                                 >
+                    </p:inputText>
+                    
+                    <p:outputLabel for='txtAreaIrrigated' value="Area Irrigated"/>
+                    <p:inputText id='txtAreaIrrigated' value="#{holdingDataBean.holdingData.areaIrrigated}" required="true"
+                                 requiredMessage="Please enter Sr No" label="Sr No"
+                                 >
+                    </p:inputText>
+                    
+                </p:panelGrid>
+                <p:panelGrid >
+                    <p:spacer height="10" width="10" />
+                    <p:commandButton value="Save" action="#{holdingDataBean.save()}" update="errorMessage pnlData"/>
+                    <p:spacer height="100" width="10"/>
+                    <p:commandButton value="Reset" action="#{holdingDataBean.reset()}" update="errorMessage pnlData pnlCommonData" process="@this" />
                 </p:panelGrid>
             </p:panel>
         </h:form>

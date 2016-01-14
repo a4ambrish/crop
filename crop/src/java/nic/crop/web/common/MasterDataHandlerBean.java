@@ -81,10 +81,8 @@ public class MasterDataHandlerBean implements Serializable{
             DistrictMasterDO dobj = districtList.get(i);
             
             if (dobj.getStateUT().equals(stateCd)) {
-                System.out.println("dobj.getStateUT() found"+dobj.getStateUT());
                 selectItem.setValue(dobj.getDistCd());
                 selectItem.setLabel(dobj.getDistName());
-                System.out.println("added "+dobj.getDistName());
                 dataList.add(selectItem);
             }
         }

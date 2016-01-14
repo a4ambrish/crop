@@ -10,6 +10,7 @@ import common.context.ClientContext;
 import common.context.UserAuthenticationException;
 import common.remote.AuthServer;
 import common.security.Encryption;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +24,7 @@ import server.db.connection.TransactionManagerLocal;
  *
  * @author ambrish
  */
-public class AuthServerImpl implements AuthServer {
+public class AuthServerImpl implements AuthServer,Serializable {
 
     @Override
     public ClientContext authenticateUser(String userid, String saltedPassword, String saltKey, String poolName) throws RemoteException, ClientException, UserAuthenticationException {
