@@ -38,88 +38,156 @@ public class FormServerImpl implements FormServer, Serializable {
         switch (serviceId) {
             case ServiceIds.DATA_ENTRY:
                 if (operationId == OperationIds.P_HOLDING_DATA) {
-
                     HoldingDataDO dobj = (HoldingDataDO) data.getDataObject();
-                    System.out.println("dobj " + dobj);
-                    String tableName = "h_" + dobj.getStateUT() + dobj.getDistCd();
-                    boolean validate = chkAndCreateHoldingTable(tableName);
-                    if (validate) {
-                        String sqlQuery = "INSERT INTO " + tableName + "(state_ut, dist_cd, tehs_cd, vill_cd, sr_no, area_sown, current_fallow,area_uncultivated, area_irrigated) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
-                        TransactionManagerLocal tmgr = null;
-                        try {
-                            tmgr = new TransactionManagerLocal("Holding Data Entry");
-                            PreparedStatement prstmt = tmgr.prepareStatement(sqlQuery);
-                            prstmt.setString(1, dobj.getStateUT());
-                            prstmt.setString(2, dobj.getDistCd());
-                            prstmt.setString(3, dobj.getTehsCd());
-                            prstmt.setString(4, dobj.getVillCd());
-                            prstmt.setInt(5, dobj.getSrNo());
-                            prstmt.setDouble(6, dobj.getAreaSown());
-                            prstmt.setDouble(7, dobj.getCurrentFallow());
-                            prstmt.setDouble(8, dobj.getAreaUncultivated());
-                            prstmt.setDouble(9, dobj.getAreaIrrigated());
-                            tmgr.executePreparedDML();
-                            tmgr.commit();
-                            returnValue = 1;
-
-                        } catch (SQLException ex) {
-
-                            if (ex.getMessage().contains("duplicate key value")) {
-                                throw new ClientException("Sr No [  " + dobj.getSrNo() + "  ] is already exist.");
-                            } else {
-                                ex.printStackTrace();
-                            }
-                        } finally {
-                            if (tmgr != null) {
-                                tmgr.release();
-                            }
-                        }
-                    }
-
+                    returnValue = insertHoldingData(dobj);
                 }
 
                 // crop data entry starts here
                 if (operationId == OperationIds.P_CROP_DATA) {
 
                     CropDataDO dobj = (CropDataDO) data.getDataObject();
-                    System.out.println("dobj " + dobj);
-                    String tableName = "c_" + dobj.getStateUT() + dobj.getDistCd();
-                    boolean validate = chkAndCreateCropTable(tableName);
-                    if (validate) {
-                        String sqlQuery = "INSERT INTO " + tableName + "( state_ut, dist_cd, tehs_cd, vill_cd, sr_no, crop_sr, crop_cd,area_irrigated, area_unirrigated)  VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
-                        TransactionManagerLocal tmgr = null;
-                        try {
-                            tmgr = new TransactionManagerLocal("Holding Data Entry");
-                            PreparedStatement prstmt = tmgr.prepareStatement(sqlQuery);
-                            prstmt.setString(1, dobj.getStateUT());
-                            prstmt.setString(2, dobj.getDistCd());
-                            prstmt.setString(3, dobj.getTehsCd());
-                            prstmt.setString(4, dobj.getVillCd());
-                            prstmt.setInt(5, dobj.getSrNo());
-                            prstmt.setInt(6, dobj.getCropSrNo());
-                            prstmt.setString(7, dobj.getCropCd());
-                            prstmt.setDouble(8, dobj.getAreaIrrigated());
-                            prstmt.setDouble(9, dobj.getAreaUnIrrigated());
-                            tmgr.executePreparedDML();
-                            tmgr.commit();
-                            returnValue = 1;
-
-                        } catch (SQLException ex) {
-
-                            if (ex.getMessage().contains("duplicate key value")) {
-                                throw new ClientException("Sr No [  " + dobj.getSrNo() + "  ] is already exist.");
-                            } else {
-                                ex.printStackTrace();
-                            }
-                        } finally {
-                            if (tmgr != null) {
-                                tmgr.release();
-                            }
-                        }
-                    }
-
+                    HoldingDataDO holdingDobj = (HoldingDataDO) data.getDataObjects()[1];
+                    returnValue = insertHoldingAndCropData(dobj, holdingDobj);
                 }
                 break;
+        }
+        return returnValue;
+    }
+
+    private int insertHoldingData(HoldingDataDO dobj) throws ClientException {
+
+        System.out.println("dobj " + dobj);
+        int returnValue = 0;
+        String tableName = "h_" + dobj.getStateUT() + dobj.getDistCd();
+        boolean validate = chkAndCreateHoldingTable(tableName);
+        if (validate) {
+            String sqlQuery = "INSERT INTO " + tableName + "(state_ut, dist_cd, tehs_cd, vill_cd, sr_no, area_sown, current_fallow,area_uncultivated, area_irrigated) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
+            TransactionManagerLocal tmgr = null;
+            try {
+                tmgr = new TransactionManagerLocal("Holding Data Entry");
+                PreparedStatement prstmt = tmgr.prepareStatement(sqlQuery);
+                prstmt.setString(1, dobj.getStateUT());
+                prstmt.setString(2, dobj.getDistCd());
+                prstmt.setString(3, dobj.getTehsCd());
+                prstmt.setString(4, dobj.getVillCd());
+                prstmt.setInt(5, dobj.getSrNo());
+                prstmt.setDouble(6, dobj.getAreaSown());
+                prstmt.setDouble(7, dobj.getCurrentFallow());
+                prstmt.setDouble(8, dobj.getAreaUncultivated());
+                prstmt.setDouble(9, dobj.getAreaIrrigated());
+                tmgr.executePreparedDML();
+                tmgr.commit();
+                returnValue = 1;
+
+            } catch (SQLException ex) {
+
+                if (ex.getMessage().contains("duplicate key value")) {
+                    throw new ClientException("Sr No [  " + dobj.getSrNo() + "  ] is already exist.");
+                } else {
+                    ex.printStackTrace();
+                }
+            } finally {
+                if (tmgr != null) {
+                    tmgr.release();
+                }
+            }
+        }
+        return returnValue;
+
+    }
+
+    private int insertCropData(CropDataDO dobj) throws ClientException {
+
+        int returnValue = 0;
+        String tableName = "c_" + dobj.getStateUT() + dobj.getDistCd();
+        boolean validate = chkAndCreateCropTable(tableName);
+        if (validate) {
+            String sqlQuery = "INSERT INTO " + tableName + "( state_ut, dist_cd, tehs_cd, vill_cd, sr_no, crop_sr, crop_cd,area_irrigated, area_unirrigated)  VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
+            TransactionManagerLocal tmgr = null;
+            try {
+                tmgr = new TransactionManagerLocal("Holding Data Entry");
+                PreparedStatement prstmt = tmgr.prepareStatement(sqlQuery);
+                prstmt.setString(1, dobj.getStateUT());
+                prstmt.setString(2, dobj.getDistCd());
+                prstmt.setString(3, dobj.getTehsCd());
+                prstmt.setString(4, dobj.getVillCd());
+                prstmt.setInt(5, dobj.getSrNo());
+                prstmt.setInt(6, dobj.getCropSrNo());
+                prstmt.setString(7, dobj.getCropCd());
+                prstmt.setDouble(8, dobj.getAreaIrrigated());
+                prstmt.setDouble(9, dobj.getAreaUnIrrigated());
+                tmgr.executePreparedDML();
+                tmgr.commit();
+                returnValue = 1;
+
+            } catch (SQLException ex) {
+
+                if (ex.getMessage().contains("duplicate key value")) {
+                    throw new ClientException("Sr No [  " + dobj.getSrNo() + "  ] is already exist.");
+                } else {
+                    ex.printStackTrace();
+                }
+            } finally {
+                if (tmgr != null) {
+                    tmgr.release();
+                }
+            }
+        }
+        return returnValue;
+    }
+
+    private int insertHoldingAndCropData(CropDataDO cropDobj, HoldingDataDO holdingDobj) throws ClientException {
+
+        int returnValue = 0;
+        String tableNameCrop = "c_" + cropDobj.getStateUT() + cropDobj.getDistCd();
+        boolean validateCrop = chkAndCreateCropTable(tableNameCrop);
+        String tableNameHolding = "h_" + holdingDobj.getStateUT() + holdingDobj.getDistCd();
+        boolean validateHolding = chkAndCreateCropTable(tableNameHolding);
+        if (validateCrop && validateHolding) {
+            String sqlCropQuery = "INSERT INTO " + tableNameCrop + "( state_ut, dist_cd, tehs_cd, vill_cd, sr_no, crop_sr, crop_cd,area_irrigated, area_unirrigated)  VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
+            TransactionManagerLocal tmgr = null;
+            try {
+                tmgr = new TransactionManagerLocal("Crop And Holding Data Entry");
+                PreparedStatement prstmt = tmgr.prepareStatement(sqlCropQuery);
+                prstmt.setString(1, cropDobj.getStateUT());
+                prstmt.setString(2, cropDobj.getDistCd());
+                prstmt.setString(3, cropDobj.getTehsCd());
+                prstmt.setString(4, cropDobj.getVillCd());
+                prstmt.setInt(5, cropDobj.getSrNo());
+                prstmt.setInt(6, cropDobj.getCropSrNo());
+                prstmt.setString(7, cropDobj.getCropCd());
+                prstmt.setDouble(8, cropDobj.getAreaIrrigated());
+                prstmt.setDouble(9, cropDobj.getAreaUnIrrigated());
+                tmgr.executePreparedDML();
+
+                String sqlHoldingQuery = "INSERT INTO " + tableNameHolding + "(state_ut, dist_cd, tehs_cd, vill_cd, sr_no, area_sown, current_fallow,area_uncultivated, area_irrigated) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
+
+                PreparedStatement prstmtHolding = tmgr.prepareStatement(sqlHoldingQuery);
+                prstmtHolding.setString(1, holdingDobj.getStateUT());
+                prstmtHolding.setString(2, holdingDobj.getDistCd());
+                prstmtHolding.setString(3, holdingDobj.getTehsCd());
+                prstmtHolding.setString(4, holdingDobj.getVillCd());
+                prstmtHolding.setInt(5, holdingDobj.getSrNo());
+                prstmtHolding.setDouble(6, holdingDobj.getAreaSown());
+                prstmtHolding.setDouble(7, holdingDobj.getCurrentFallow());
+                prstmtHolding.setDouble(8, holdingDobj.getAreaUncultivated());
+                prstmtHolding.setDouble(9, holdingDobj.getAreaIrrigated());
+                tmgr.executePreparedDML();
+                tmgr.commit();
+                returnValue = 1;
+
+            } catch (SQLException ex) {
+
+                if (ex.getMessage().contains("duplicate key value")) {
+                    throw new ClientException("Crop Sr No [  " + cropDobj.getSrNo() + "  ] or Holding Sr No [  " + holdingDobj.getSrNo() + "  ]  is already exist.");
+                } else {
+                    ex.printStackTrace();
+                }
+            } finally {
+                if (tmgr != null) {
+                    tmgr.release();
+                }
+            }
         }
         return returnValue;
     }

@@ -11,6 +11,7 @@ import common.ModuleServer;
 import common.OperationIds;
 import common.ServiceIds;
 import common.context.ClientContext;
+import common.dobj.DO;
 import common.dobj.crop.CropDataDO;
 import common.dobj.crop.HoldingDataDO;
 import common.remote.FormServer;
@@ -47,12 +48,24 @@ public class CropDataBean implements Serializable {
     private String cropCd;
 
     private CropDataDO cropData = new CropDataDO();
+    private HoldingDataDO holdingData = null;
 
     public CropDataBean() {
 
         masterDataHandlerBean = (MasterDataHandlerBean) JSFUtils.getFromApplication("masterDataHandlerBean");
         stateList = masterDataHandlerBean.getStateAsSelectItemList();
         cropList = masterDataHandlerBean.getCropAsSelectItemList();
+        holdingData = (HoldingDataDO) JSFUtils.getFromFlashScope("holdingData");
+        if(holdingData!=null){
+        stateCd=holdingData.getStateUT();
+        districtCd = holdingData.getDistCd();
+        tehsilCd = holdingData.getTehsCd();
+        villageCd = holdingData.getVillCd();
+         districtList = masterDataHandlerBean.getDistrictAsSelectItemList(stateCd);
+        tehsilList = masterDataHandlerBean.getTehsilAsSelectItemList(districtCd);
+        villageList = masterDataHandlerBean.getVillageAsSelectItemList(tehsilCd);
+        
+        }
 
     }
 
@@ -70,7 +83,11 @@ public class CropDataBean implements Serializable {
             cropData.setVillCd(villageCd);
             cropData.setCropCd(cropCd);
 
-            FormData formData = new FormData(ctx, cropData, serviceId, operaionId);
+            DO[] dataObjects = new DO[2];
+            dataObjects[0] = cropData;
+            dataObjects[1] = holdingData;
+
+            FormData formData = new FormData(ctx, dataObjects, serviceId, operaionId);
             Object ret = formServer.process(formData);
             if (ret != null) {
                 int returnVal = (int) ret;

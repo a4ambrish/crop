@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ambrish/Documents/crop/crop/web/client/holdingentry.xhtml</file>
-            <file>file:/C:/Users/ambrish/Documents/crop/crop/src/java/nic/crop/web/common/JSFUtils.java</file>
-            <file>file:/C:/Users/ambrish/Documents/crop/crop/web/templates/clientmenu.xhtml</file>
+            <file>file:/C:/Users/ambrish/Documents/crop/crop/src/java/nic/crop/web/common/WebAppCommonUtils.java</file>
+            <file>file:/C:/Users/ambrish/Documents/crop/crop/src/java/nic/corp/web/ui/client/CropDataBean.java</file>
             <file>file:/C:/Users/ambrish/Documents/crop/crop/src/java/nic/corp/web/ui/client/HoldingDataBean.java</file>
         </group>
     </open-files>

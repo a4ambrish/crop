@@ -55,7 +55,7 @@ public class HoldingDataBean implements Serializable {
 
     }
 
-    public void save() {
+    public String save() {
         System.out.println("saving start");
         try {
             FormServer formServer = ModuleServer.formServer();
@@ -67,16 +67,22 @@ public class HoldingDataBean implements Serializable {
             holdingData.setDistCd(districtCd);
             holdingData.setTehsCd(tehsilCd);
             holdingData.setVillCd(villageCd);
-            FormData formData = new FormData(ctx, holdingData, serviceId, operaionId);
-            Object ret = formServer.process(formData);
-            if (ret != null) {
-                int returnVal = (int) ret;
-                System.out.println("returnVal  --> " + ret);
+            if (holdingData.getAreaSown() == 0) {
+                FormData formData = new FormData(ctx, holdingData, serviceId, operaionId);
+                Object ret = formServer.process(formData);
+                if (ret != null) {
+                    int returnVal = (int) ret;
+                    System.out.println("returnVal  --> " + ret);
+                } else {
+                    System.out.println("formprocess retrun null");
+                }
+                JSFUtils.addFacesInfoMessage("Data Saved Successfully.");
+                holdingData = new HoldingDataDO();
+                return null;
             } else {
-                System.out.println("formprocess retrun null");
+                JSFUtils.storeOnFlashScope("holdingData", holdingData);
+                return "cropentry?faces-redirect=true";
             }
-            JSFUtils.addFacesInfoMessage("Data Saved Successfully.");
-            holdingData = new HoldingDataDO();
 
         } catch (RemoteException ex) {
             System.out.println(ex.getMessage());
@@ -87,7 +93,7 @@ public class HoldingDataBean implements Serializable {
             System.out.println(ex.getMessage());
             JSFUtils.addFacesErrorMessage("Technial Problem - " + ex.getMessage());
         }
-
+        return null;
     }
 
     public void reset() {

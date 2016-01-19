@@ -13,7 +13,7 @@ package server.db.connection;
 /**
  * Importing standard java classes
  */
-import com.lowagie.text.pdf.PRStream;
+
 import common.ClientException;
 import java.sql.*;
 import java.util.*;

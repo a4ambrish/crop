@@ -26,12 +26,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+
 
 public class WebAppCommonUtils {
 
@@ -122,29 +117,29 @@ public class WebAppCommonUtils {
 
     }
 
-    public static void downloadPaymentRcpt(HashMap<String, Object> hm) {
-        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext()
-                .getContext();
-        InputStream inputStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/jrxml" + File.separator + "payment_rcpt.jrxml");
-        byte[] pdfByteArray = null;
-        try {
-            JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hm, new JREmptyDataSource());
-            pdfByteArray = JasperExportManager.exportReportToPdf(jasperPrint);
-            System.out.println(pdfByteArray.length);
-            FacesContext fc = FacesContext.getCurrentInstance();
-            ExternalContext ec = fc.getExternalContext();
-            ec.responseReset();
-            ec.setResponseContentType("application/pdf");
-            ec.setResponseContentLength(pdfByteArray.length);
-            ec.setResponseHeader("Content-Disposition", "attachment; filename=PayRcpt" + hm.get("CASE_REF_NO") + ".pdf");
-            ec.getResponseOutputStream().write(pdfByteArray, 0, pdfByteArray.length);
-            fc.responseComplete();
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-    }
+//    public static void downloadPaymentRcpt(HashMap<String, Object> hm) {
+//        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext()
+//                .getContext();
+//        InputStream inputStream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/jrxml" + File.separator + "payment_rcpt.jrxml");
+//        byte[] pdfByteArray = null;
+//        try {
+//            JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hm, new JREmptyDataSource());
+//            pdfByteArray = JasperExportManager.exportReportToPdf(jasperPrint);
+//            System.out.println(pdfByteArray.length);
+//            FacesContext fc = FacesContext.getCurrentInstance();
+//            ExternalContext ec = fc.getExternalContext();
+//            ec.responseReset();
+//            ec.setResponseContentType("application/pdf");
+//            ec.setResponseContentLength(pdfByteArray.length);
+//            ec.setResponseHeader("Content-Disposition", "attachment; filename=PayRcpt" + hm.get("CASE_REF_NO") + ".pdf");
+//            ec.getResponseOutputStream().write(pdfByteArray, 0, pdfByteArray.length);
+//            fc.responseComplete();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//
+//        }
+//
+//    }
 
 }
